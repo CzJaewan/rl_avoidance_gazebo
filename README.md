@@ -24,3 +24,7 @@ rl_collision_avoidance test in gazebo simulator
   cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST
   python test_run.py
 ```
+- Policy Data link
+```
+  https://drive.google.com/drive/folders/1vQ1XKbU1Lid40Vm92H0UDRcvquYNSrYi?usp=sharing
+```
