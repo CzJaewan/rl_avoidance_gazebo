@@ -22,7 +22,6 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
 )
 
-
 catkin_package(
    INCLUDE_DIRS include
 )
@@ -38,6 +37,6 @@ include_directories(/usr/include)
 link_directories(/usr/lib)
 
 # Own Global planner for tracking desired trajectory
-add_library( global_planner src/global_planner/global_planner.cpp)
-target_link_libraries(global_planner ${catkin_LIBRARIES} )
+# add_library(global_planner_libs src/global_planner/global_planner.cpp)
+# target_link_libraries(global_planner_libs ipopt ${catkin_LIBRARIES} )
 

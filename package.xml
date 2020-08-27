@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>The gazebo rl test package</description>
 
-  <maintainer email="wodhks8431@gmail.com">Geonhee Lee</maintainer>
+  <maintainer email="wodhks8431@gmail.com">Jaewan Choi</maintainer>
   <license>Apache 2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
@@ -48,10 +48,5 @@
 
   <exec_depend>nav_core</exec_depend>
 
-  <!-- The export tag contains other, unspecified, tags -->
-  <export>
-    <!-- Other tools can request additional information be placed here -->
-    <nav_core plugin="${prefix}/global_planner_plugin.xml" />
 
-  </export>
 </package>
