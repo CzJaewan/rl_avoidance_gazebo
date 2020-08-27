@@ -27,4 +27,14 @@ rl_collision_avoidance test in gazebo simulator
 - Policy Data link
 ```
   https://drive.google.com/drive/folders/1vQ1XKbU1Lid40Vm92H0UDRcvquYNSrYi?usp=sharing
-```
+
+  - origin : rl-collision-avoidance reward
+  - rc : rl-collision-avoidance reward, collision reward(50)
+  - rc2 : rl-collision-avoidance reward, collision reward(30)
+  - rg : rl-collision-avoidance reward, time_distance reward(abs)
+  - rt : rl-collision-avoidance reward, time reward(-0.1)
+  - rt2 : rl-collision-avoidance reward, time reward(-0.5)
+  - rt05 : rl-collision-avoidance reward, time reward(-0.05)
+  - rw : rl-collision-avoidance reward, omega reward remove
+```  
+  
