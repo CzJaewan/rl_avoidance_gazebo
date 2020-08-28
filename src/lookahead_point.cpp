@@ -136,9 +136,6 @@ LookAhead::LookAhead()
 
     lookAhead_pub = n_.advertise<geometry_msgs::Pose>("/lookAhead_point", 1);
 
-    //Timer
-    timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &LookAhead::LookAhead, this); // Duration(0.05) -> 20Hz
-
 
     //Init variables
     foundForwardPt = false;
@@ -340,7 +337,7 @@ double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
     geometry_msgs::Point odom_path_wayPt;
     geometry_msgs::Point forwardPt;
     geometry_msgs::Point odom_car2WayPtVec;
-    geometry_msge::Pose lookAhead_Pose;
+    geometry_msgs::Pose lookAhead_Pose;
     foundForwardPt = false;
 
     if(!goal_reached){
@@ -364,7 +361,7 @@ double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
                         forwardPt = odom_path_wayPt;
 
                         lookAhead_Pose.position.x = odom_path_wayPt.x;
-                        lookAhead_Pose.position.y = odom_path_wayPt.x;
+                        lookAhead_Pose.position.y = odom_path_wayPt.y;
                         lookAhead_pub.publish(lookAhead_Pose);
 
                         foundForwardPt = true;
