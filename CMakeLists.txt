@@ -37,6 +37,8 @@ include_directories(/usr/include)
 link_directories(/usr/lib)
 
 # Own Global planner for tracking desired trajectory
-# add_library(global_planner_libs src/global_planner/global_planner.cpp)
-# target_link_libraries(global_planner_libs ipopt ${catkin_LIBRARIES} )
+# Look a head Node
+ADD_EXECUTABLE( Look_a_head_Node src/lookahead_point.cpp)
+TARGET_LINK_LIBRARIES(Look_a_head_Node ${catkin_LIBRARIES})
+
 
