@@ -10,7 +10,7 @@ rl_collision_avoidance test in gazebo simulator
 ```
   git clone https://github.com/CzJaewan/rl_avoidance_gazebo.git
 ```
-## RUN
+## RUN used Waitpoint 
 - Servingbot Gazebo world
 ```
   roslaunch servingbot_gazebo servingbot_rl_world.launch
@@ -24,6 +24,25 @@ rl_collision_avoidance test in gazebo simulator
   cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST
   python test_run.py
 ```
+
+## RUN used Look a head
+- Servingbot Gazebo world
+```
+  roslaunch servingbot_gazebo servingbot_rl_world.launch
+``` 
+- Amcl & Map & Globalplanner & Look a head generator
+```
+  roslaunch gazebo_rl_test servingbot_rl_lookahead.launch 
+```
+- PPO local planner
+```
+  cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST
+  change the from test_world import StageWorld' -> 'from test_world_LAH import StageWorld' in test_run.py 
+  python test_run.py
+  
+```
+
+## Policy Data
 - Policy Data link
 ```
   https://drive.google.com/drive/folders/1vQ1XKbU1Lid40Vm92H0UDRcvquYNSrYi?usp=sharing
