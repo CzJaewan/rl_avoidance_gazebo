@@ -12,7 +12,7 @@ from torch.optim import Adam
 from collections import deque
 
 from model.net import MLPPolicy, CNNPolicy
-from test_world import StageWorld
+from test_world_LAH import StageWorld
 from model.ppo import generate_action_no_sampling, transform_buffer
 
 MAX_EPISODES = 10
@@ -68,7 +68,8 @@ def enjoy(comm, env, policy, action_bound):
             real_action = comm.scatter(scaled_action, root=0)
             if terminal == True:
                 real_action[0] = 0
-                
+                real_action[1] = 0
+
             env.control_vel(real_action)
             # rate.sleep()
             rospy.sleep(0.001)

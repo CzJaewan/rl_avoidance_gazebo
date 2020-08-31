@@ -107,7 +107,7 @@ LookAhead::LookAhead()
     //Car parameter
     pn.param("L", L, 0.26); // length of car
     pn.param("Vcmd", Vcmd, 1.0);// reference speed (m/s)
-    pn.param("Lfw", Lfw, 0.5); // forward look ahead distance (m)
+    pn.param("Lfw", Lfw, 2.0); // forward look ahead distance (m)
     pn.param("lfw", lfw, 0.13); // distance between front the center of car
 
     //Controller parameter
@@ -134,8 +134,9 @@ LookAhead::LookAhead()
     amcl_sub = n_.subscribe("/amcl_pose", 5, &LookAhead::amclCB, this);
     marker_pub = n_.advertise<visualization_msgs::Marker>("/lookAhead/path_marker", 10);
 
-    lookAhead_pub = n_.advertise<geometry_msgs::Pose>("/lookAhead_point", 1);
+    lookAhead_pub = n_.advertise<geometry_msgs::PoseStamped>("/lookAhead_point", 1);
 
+    timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &LookAhead::controlLoopCB, this); //
 
     //Init variables
     foundForwardPt = false;
@@ -197,6 +198,7 @@ void LookAhead::initMarker()
 
 void LookAhead::odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg)
 {
+
     this->odom = *odomMsg;
 }
 
@@ -204,6 +206,7 @@ void LookAhead::odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg)
 
 void LookAhead::pathCB(const nav_msgs::Path::ConstPtr& pathMsg) //jaewan
 {
+
     this->map_path = *pathMsg;
 
     if(goal_received && !goal_reached)
@@ -267,6 +270,7 @@ void LookAhead::pathCB(const nav_msgs::Path::ConstPtr& pathMsg) //jaewan
 
 void LookAhead::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
 {
+
     this->goal_pos = goalMsg->pose.position;    
     try
     {
@@ -289,6 +293,7 @@ void LookAhead::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
 
 double LookAhead::getYawFromPose(const geometry_msgs::Pose& carPose)
 {
+
     float x = carPose.orientation.x;
     float y = carPose.orientation.y;
     float z = carPose.orientation.z;
@@ -304,6 +309,7 @@ double LookAhead::getYawFromPose(const geometry_msgs::Pose& carPose)
 
 bool LookAhead::isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry_msgs::Pose& carPose)
 {
+
     float car2wayPt_x = wayPt.x - carPose.position.x;
     float car2wayPt_y = wayPt.y - carPose.position.y;
     double car_theta = getYawFromPose(carPose);
@@ -320,6 +326,7 @@ bool LookAhead::isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry
 
 bool LookAhead::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos)
 {
+
     double dx = wayPt.x - car_pos.x;
     double dy = wayPt.y - car_pos.y;
     double dist = sqrt(dx*dx + dy*dy);
@@ -332,12 +339,13 @@ bool LookAhead::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const 
 
 double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
 {
+    
     geometry_msgs::Point carPose_pos = carPose.position;
     double carPose_yaw = getYawFromPose(carPose);
     geometry_msgs::Point odom_path_wayPt;
     geometry_msgs::Point forwardPt;
     geometry_msgs::Point odom_car2WayPtVec;
-    geometry_msgs::Pose lookAhead_Pose;
+    geometry_msgs::PoseStamped lookAhead_Pose;
     foundForwardPt = false;
 
     if(!goal_reached){
@@ -359,9 +367,9 @@ double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
                     if(_isWayPtAwayFromLfwDist)
                     {
                         forwardPt = odom_path_wayPt;
-
-                        lookAhead_Pose.position.x = odom_path_wayPt.x;
-                        lookAhead_Pose.position.y = odom_path_wayPt.y;
+                        lookAhead_Pose.header.frame_id = "map";
+                        lookAhead_Pose.pose.position.x = odom_path_wayPt.x;
+                        lookAhead_Pose.pose.position.y = odom_path_wayPt.y;
                         lookAhead_pub.publish(lookAhead_Pose);
 
                         foundForwardPt = true;
@@ -380,9 +388,10 @@ double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
     else if(goal_reached)
     {
         forwardPt = odom_goal_pos;
+        lookAhead_Pose.header.frame_id = "map";
 
-        lookAhead_Pose.position.x = odom_path_wayPt.x;
-        lookAhead_Pose.position.y = odom_path_wayPt.x;
+        lookAhead_Pose.pose.position.x = odom_path_wayPt.x;
+        lookAhead_Pose.pose.position.y = odom_path_wayPt.x;
         lookAhead_pub.publish(lookAhead_Pose);
 
         foundForwardPt = false;
@@ -413,6 +422,8 @@ double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
 
 double LookAhead::getW(double _alpha)
 {
+
+
     return 2*sin(_alpha)/Lfw;
 }
 
@@ -458,6 +469,7 @@ void LookAhead::amclCB(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr&
 
 void LookAhead::controlLoopCB(const ros::TimerEvent&)
 {
+
 
     geometry_msgs::Pose carPose = this->odom.pose.pose;
     geometry_msgs::Twist carVel = this->odom.twist.twist;
