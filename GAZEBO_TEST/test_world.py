@@ -89,15 +89,6 @@ class StageWorld():
 
         self.is_sub_goal = False
 
-        # -----------Global path---------------
-        #path_topic = '/move_base/TrajectoryPlannerROS/global_plan'
-        path_topic = '/move_base/GlobalPlanner/plan'
-        self.path_sub = rospy.Subscriber(path_topic, Path,self.path_callback)
-
-        # -----------test--------------------
-        waypoint_pose_topic = '/waypoint_pose'
-        self.waypoint_pose = rospy.Publisher(waypoint_pose_topic, Pose, queue_size=10)
-
         self.tf_listener = tf.TransformListener()
 
         self.PathMsg = Path()
@@ -110,20 +101,13 @@ class StageWorld():
         self.is_crashed = None
         self.is_collision = 0
 
-        self.global_goal_point = [0, 0]
         self.goal_point = [0, 0]
 
         self.pre_distance = 0
         self.distance = 0
         self.robot_radius = 0.4
 
-
-        self.way_Path = []
-        self.waypoint_gen_flag = 0
-        self.way_goal_index = 0
-
         self.goal_model = Respawn(self.goal_point[0], self.goal_point[1], 'goal')
-        self.waypoint_model = Respawn(0, 0, 'waypoint')
 
         while self.scan is None or self.speed is None or self.state is None\
                 or self.speed_GT is None or self.state_GT is None:
@@ -176,80 +160,22 @@ class StageWorld():
 
     def reset_gazebo_simulation(self):
         self.reset_gazebo()
-    
-    def waypoint_generation(self, Path_msg):
-
-        lookahead_dist = 1
-
-        path_len = len(Path_msg.poses)
-
-        waypath = []
-        waypath_pose = Path_msg.poses[0]
-
-        wayindex = 0
-
-        waystop_flag = 0
-
-        while not waystop_flag:
-
-            for i in range(path_len):
-
-                dx = Path_msg.poses[i].pose.position.x - waypath_pose.pose.position.x
-                dy = Path_msg.poses[i].pose.position.y - waypath_pose.pose.position.y
-                dist = math.sqrt(dx*dx + dy*dy)
-                
-                if dist > lookahead_dist and wayindex < i:
-                    print(dist)
-                    waypath.append(Path_msg.poses[i])
-                    waypath_pose = Path_msg.poses[i]
-                    wayindex = i
-                    break
-
-                if i == (path_len - 1):
-
-                    waypath.append(Path_msg.poses[i])
-                    waystop_flag = 1
-        
-        self.goal_point[0] = waypath[0].pose.position.x
-        self.goal_point[1] = waypath[0].pose.position.y
-
-        self.waypoint_model.goal_position.position.x = self.goal_point[0]
-        self.waypoint_model.goal_position.position.y = self.goal_point[1]
-        
-        self.waypoint_model.respawnModel()
-
-        self.way_Path = waypath
-
-    def path_callback(self, Path_msg):
-        
-        if self.waypoint_gen_flag == 1:
-            
-            self.PathMsg = Path_msg
-
-            self.waypoint_generation(Path_msg)
-            self.is_sub_goal = True
-            self.waypoint_gen_flag = 0
 
     def goal_callback(self, Goal):
 
-        self.waypoint_model.deleteModel()
         self.goal_model.deleteModel()
 
         print("goal")
 
-
-        self.global_goal_point[0] = Goal.pose.position.x
-        self.global_goal_point[1] = Goal.pose.position.y
+        self.goal_point[0] = Goal.pose.position.x
+        self.goal_point[1] = Goal.pose.position.y
         self.pre_distance = 0
         self.distance = copy.deepcopy(self.pre_distance)
 
         self.goal_model.goal_position.position.x = Goal.pose.position.x
         self.goal_model.goal_position.position.y = Goal.pose.position.y
-    
+        self.is_sub_goal = True
         self.goal_model.respawnModel()
-
-        self.waypoint_gen_flag = 1
-        self.way_goal_index = 0
 
     def get_goal(self):
         return self.is_sub_goal
@@ -365,30 +291,10 @@ class StageWorld():
         scan_min = self.collision_laser_flag(self.robot_radius)
 
         if self.distance < self.goal_size:
-            if self.way_goal_index < (len(self.way_Path)-1):
-
-                self.waypoint_model.deleteModel()
-
-                terminate = False
-                reward_g = 15
-                result = 'Reach Way Point'
-                print(result)
-                self.way_goal_index += 1
-                self.goal_point[0] = self.way_Path[self.way_goal_index].pose.position.x
-                self.goal_point[1] = self.way_Path[self.way_goal_index].pose.position.y
- 
-                self.waypoint_model.goal_position.position.x = self.goal_point[0]
-                self.waypoint_model.goal_position.position.y = self.goal_point[1]
+            terminate = True
+            reward_g = 15
+            result = 'Reach Goal'
             
-
-                self.waypoint_model.respawnModel()
-
-
-            else :
-                terminate = True
-                reward_g = 15
-                result = 'Reach Goal'
-                
         if self.is_collision == 1:
             terminate = True
             reward_c = -15.
@@ -397,7 +303,7 @@ class StageWorld():
         if np.abs(w) > 1:
             reward_w = -0.1 * np.abs(w)
 
-        if t > 10000:
+        if t > 100000:
             terminate = True
             result = 'Time out'
 
