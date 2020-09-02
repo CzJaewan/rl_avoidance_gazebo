@@ -34,7 +34,7 @@
     <!--  ************** Navigation ***************  -->   
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2costmap_common_params.yaml" command="load" ns="global_costmap" />
-        <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2costmap_common_params_local.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2local_costmap_params.yaml" command="load" />
         <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2global_costmap_params.yaml" command="load" />        
         

@@ -23,7 +23,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-   INCLUDE_DIRS include
+   INCLUDE_DIRS
 )
 
 ###########
@@ -32,7 +32,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories( ${catkin_INCLUDE_DIRS} include )
+include_directories( ${catkin_INCLUDE_DIRS})
 include_directories(/usr/include)
 link_directories(/usr/lib)
 
