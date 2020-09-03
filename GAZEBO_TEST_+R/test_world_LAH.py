@@ -48,8 +48,6 @@ class StageWorld():
         self.goal_value = 0.
 
         # lidar
-        self.lidar_danger = 0.2
-
         cmd_pose_topic = 'robot_' + str(index) + '/cmd_pose'
         self.cmd_pose = rospy.Publisher(cmd_pose_topic, Pose, queue_size=10)
 
@@ -242,7 +240,7 @@ class StageWorld():
 
         scan_min = np.min(scan)
 
-        if scan_min <= r:
+        if scan_min <= 0.1:
             self.is_collision = 1
         else:
             self.is_collision = 0

@@ -47,9 +47,6 @@ class StageWorld():
         self.robot_value = 10.
         self.goal_value = 0.
 
-        # lidar
-        self.lidar_danger = 0.2
-
         cmd_pose_topic = 'robot_' + str(index) + '/cmd_pose'
         self.cmd_pose = rospy.Publisher(cmd_pose_topic, Pose, queue_size=10)
 
@@ -116,13 +113,11 @@ class StageWorld():
         self.lidar_danger = 0.5
         self.scan_min = 6.0
 
-
         self.global_goal_point = [0, 0]
         self.goal_point = [0, 0]
 
         self.pre_distance = 0
         self.distance = 0
-
 
         self.way_Path = []
         self.waypoint_gen_flag = 0
@@ -137,7 +132,6 @@ class StageWorld():
 
         rospy.sleep(1.)
   
-
 
     def set_rviz_pose(self, x, y, w):
     
@@ -295,7 +289,7 @@ class StageWorld():
 
         scan_min = np.min(scan)
 
-        if scan_min <= r:
+        if scan_min <= 0.1:
             self.is_collision = 1
         else:
             self.is_collision = 0
