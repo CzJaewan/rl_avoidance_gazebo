@@ -30,34 +30,45 @@ rl_collision_avoidance test in gazebo simulator
 ## RUN used Look a head
 - Servingbot Gazebo world
 ```
-  roslaunch servingbot_gazebo servingbot_rl_world.launch
+  roslaunch servingbot_gazebo multi-servingbot_rl_world.launch
 ``` 
-- Amcl & Map & Globalplanner & Look a head generator
+- Amcl & Map & Globalplanner & waypoint generator
 ```
-  roslaunch gazebo_rl_test servingbot_rl_lookahead.launch 
+  roslaunch gazebo_rl_test multi_servingbot_rl_waypoint.launch 
 ```
 - PPO local planner
 ```
-  cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST
-  change the from test_world import StageWorld' -> 'from test_world_LAH import StageWorld' in test_run.py 
-  python test_run.py
-  
+  cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST_R
+  change the from test_world import StageWorld' -> 'from test_world_wp import StageWorld' in test_run.py 
+  mpiexec -np 2 python test_run_r.py
 ```
+- Goal pub
+```
+  cd ~/catkin_ws/src/rl_avoidance_gazebo/
+  mpexec -np 2 python multi_goal_pub.py
+```
+
 # rl_avoidance_gazebo ( Multi agent )
 
 ## RUN used Waitpoint 
 - Servingbot Gazebo world
 ```
-  roslaunch servingbot_gazebo servingbot_rl_world.launch
+  roslaunch servingbot_gazebo multi-servingbot_rl_world.launch
 ``` 
-- Amcl & Map & Globalplanner
+- Amcl & Map & Globalplanner & Look a head generator
 ```
-  roslaunch gazebo_rl_test servingbot_rl.launch 
+  roslaunch gazebo_rl_test multi_servingbot_rl_lookahead.launch 
 ```
 - PPO local planner
 ```
-  cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST
-  python test_run.py
+  cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST_R
+  change the from test_world import StageWorld' -> 'from test_world_LAH import StageWorld' in test_run.py 
+  mpiexec -np 2 python test_run_r.py
+```
+- Goal pub
+```
+  cd ~/catkin_ws/src/rl_avoidance_gazebo/
+  mpexec -np 2 python multi_goal_pub.py
 ```
 
 ## RUN used Look a head
