@@ -1,0 +1,272 @@
+2020-09-14 13:39:40,910 - INFO - Error: Policy File Cannot Find
+2020-09-14 13:40:25,416 - INFO - ####################################
+2020-09-14 13:40:25,416 - INFO - ############Loading Model###########
+2020-09-14 13:40:25,416 - INFO - ####################################
+2020-09-14 13:44:54,066 - INFO - ####################################
+2020-09-14 13:44:54,066 - INFO - ############Loading Model###########
+2020-09-14 13:44:54,066 - INFO - ####################################
+2020-09-14 14:03:24,882 - INFO - ####################################
+2020-09-14 14:03:24,882 - INFO - ############Loading Model###########
+2020-09-14 14:03:24,882 - INFO - ####################################
+2020-09-14 14:03:41,846 - INFO - Goal (013.7, -01.3), Episode 00001, setp 3760, Action [0.979, -0.043], Reach Goal
+2020-09-14 14:04:03,118 - INFO - Goal (001.4, -03.8), Episode 00002, setp 4783, Action [0.841, -0.099], Reach Goal
+2020-09-14 14:04:30,811 - INFO - Goal (017.2, 005.8), Episode 00003, setp 6306, Action [0.886, 0.142], Reach Goal
+2020-09-14 14:05:00,631 - INFO - Goal (000.6, -01.4), Episode 00004, setp 6606, Action [0.850, -0.152], Reach Goal
+2020-09-14 14:05:24,767 - INFO - Goal (014.0, -02.0), Episode 00005, setp 4901, Action [0.863, -0.193], Reach Goal
+2020-09-14 14:07:33,623 - INFO - Goal (002.5, -01.8), Episode 00006, setp 31722, Action [0.686, -0.612], Reach Goal
+2020-09-14 14:07:50,497 - INFO - Goal (008.9, -01.6), Episode 00007, setp 2236, Action [0.897, -0.266], Reach Goal
+2020-09-14 14:07:59,401 - INFO - Goal (013.4, 004.8), Episode 00008, setp 2140, Action [0.977, 0.243], Reach Goal
+2020-09-14 14:08:13,835 - INFO - Goal (013.0, 004.2), Episode 00009, setp 2653, Action [0.512, -0.613], Crashed
+2020-09-14 14:14:37,998 - INFO - ####################################
+2020-09-14 14:14:37,998 - INFO - ############Loading Model###########
+2020-09-14 14:14:37,998 - INFO - ####################################
+2020-09-14 14:21:04,489 - INFO - ####################################
+2020-09-14 14:21:04,490 - INFO - ############Loading Model###########
+2020-09-14 14:21:04,490 - INFO - ####################################
+2020-09-14 14:21:28,897 - INFO - Goal (017.6, 007.2), Episode 00001, setp 5506, Action [0.951, 0.030], Reach Goal
+2020-09-14 14:22:10,583 - INFO - Goal (-11.2, -02.1), Episode 00002, setp 9799, Action [0.922, -0.096], Reach Goal
+2020-09-14 14:22:59,601 - INFO - Goal (016.2, -02.0), Episode 00003, setp 8712, Action [0.914, -0.110], Reach Goal
+2020-09-14 14:23:25,896 - INFO - Goal (001.6, 000.3), Episode 00004, setp 6100, Action [0.741, -0.161], Reach Goal
+2020-09-14 14:23:45,822 - INFO - Goal (010.2, -01.2), Episode 00005, setp 3085, Action [0.915, 0.254], Reach Goal
+2020-09-14 14:23:53,910 - INFO - Goal (010.2, -01.2), Episode 00006, setp 970, Action [0.286, -0.258], Crashed
+2020-09-14 14:24:16,199 - INFO - Goal (010.7, -01.2), Episode 00007, setp 2852, Action [0.993, -0.034], Reach Goal
+2020-09-14 14:24:24,461 - INFO - Goal (008.9, -02.3), Episode 00008, setp 1287, Action [0.475, -0.549], Crashed
+2020-09-14 14:24:46,471 - INFO - Goal (012.3, -07.0), Episode 00009, setp 3802, Action [0.993, 0.022], Reach Goal
+2020-09-14 14:25:21,613 - INFO - Goal (-00.9, -00.4), Episode 00010, setp 6124, Action [0.798, -0.144], Reach Goal
+2020-09-14 14:25:40,223 - INFO - ####################################
+2020-09-14 14:25:40,223 - INFO - ############Loading Model###########
+2020-09-14 14:25:40,223 - INFO - ####################################
+2020-09-14 14:25:56,789 - INFO - Goal (006.7, -00.2), Episode 00001, setp 2267, Action [0.870, -0.333], Crashed
+2020-09-14 14:26:14,458 - INFO - Goal (012.7, -01.7), Episode 00002, setp 3514, Action [0.905, 0.029], Reach Goal
+2020-09-14 14:26:29,143 - INFO - Goal (007.0, -02.1), Episode 00003, setp 2478, Action [0.689, -0.338], Crashed
+2020-09-14 14:26:56,461 - INFO - Goal (013.3, -01.1), Episode 00004, setp 3587, Action [0.954, -0.035], Reach Goal
+2020-09-14 14:27:08,076 - INFO - Goal (009.0, -02.5), Episode 00005, setp 2072, Action [0.638, -0.394], Crashed
+2020-09-14 14:27:32,557 - INFO - Goal (012.9, -03.0), Episode 00006, setp 3429, Action [0.994, -0.031], Reach Goal
+2020-09-14 14:28:07,640 - INFO - Goal (008.4, -02.9), Episode 00007, setp 2305, Action [0.636, -0.291], Crashed
+2020-09-14 14:28:15,513 - INFO - Goal (010.4, -03.1), Episode 00008, setp 002, Action [0.500, -0.500], Reach Goal
+2020-09-14 14:28:32,597 - INFO - Goal (007.9, -01.0), Episode 00009, setp 2139, Action [0.994, -0.210], Reach Goal
+2020-09-14 14:28:49,165 - INFO - Goal (-00.4, -02.7), Episode 00010, setp 3279, Action [0.825, -0.211], Reach Goal
+2020-09-14 14:32:12,376 - INFO - ####################################
+2020-09-14 14:32:12,377 - INFO - ############Loading Model###########
+2020-09-14 14:32:12,377 - INFO - ####################################
+2020-09-14 14:32:39,655 - INFO - Goal (012.6, -01.5), Episode 00001, setp 4352, Action [0.952, -0.230], Reach Goal
+2020-09-14 14:33:10,020 - INFO - Goal (-08.4, -01.6), Episode 00002, setp 6613, Action [0.905, -0.114], Reach Goal
+2020-09-14 14:33:12,402 - INFO - Goal (-08.4, -01.6), Episode 00003, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,403 - INFO - Goal (-08.4, -01.6), Episode 00004, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,405 - INFO - Goal (-08.4, -01.6), Episode 00005, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,407 - INFO - Goal (-08.4, -01.6), Episode 00006, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,408 - INFO - Goal (-08.4, -01.6), Episode 00007, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,410 - INFO - Goal (-08.4, -01.6), Episode 00008, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,411 - INFO - Goal (-08.4, -01.6), Episode 00009, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:33:12,413 - INFO - Goal (-08.4, -01.6), Episode 00010, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:35:49,961 - INFO - ####################################
+2020-09-14 14:35:49,961 - INFO - ############Loading Model###########
+2020-09-14 14:35:49,961 - INFO - ####################################
+2020-09-14 14:36:16,083 - INFO - Goal (015.8, -01.6), Episode 00001, setp 4082, Action [0.980, -0.017], Reach Goal
+2020-09-14 14:36:46,233 - INFO - Goal (-02.7, -00.9), Episode 00002, setp 6950, Action [0.946, 0.140], Reach Goal
+2020-09-14 14:37:21,068 - INFO - Goal (016.3, -02.4), Episode 00003, setp 8022, Action [0.937, 0.106], Reach Goal
+2020-09-14 14:37:38,787 - INFO - Goal (007.5, -00.7), Episode 00004, setp 4151, Action [0.914, 0.220], Crashed
+2020-09-14 14:37:57,154 - INFO - Goal (011.4, 001.7), Episode 00005, setp 2765, Action [0.980, -0.038], Crashed
+2020-09-14 14:38:17,204 - INFO - Goal (015.1, 001.6), Episode 00006, setp 4102, Action [0.970, 0.072], Reach Goal
+2020-09-14 14:38:43,764 - INFO - Goal (000.4, -02.6), Episode 00007, setp 6010, Action [0.955, 0.150], Reach Goal
+2020-09-14 14:39:03,378 - INFO - Goal (009.6, -02.9), Episode 00008, setp 4383, Action [0.918, 0.178], Crashed
+2020-09-14 14:39:21,271 - INFO - Goal (013.0, -02.5), Episode 00009, setp 3480, Action [0.982, 0.031], Reach Goal
+2020-09-14 14:48:31,379 - INFO - Goal (013.0, -02.5), Episode 00010, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 14:51:09,620 - INFO - ####################################
+2020-09-14 14:51:09,620 - INFO - ############Loading Model###########
+2020-09-14 14:51:09,620 - INFO - ####################################
+2020-09-14 14:51:28,997 - INFO - Goal (014.6, -00.8), Episode 00001, setp 3988, Action [0.972, -0.006], Reach Goal
+2020-09-14 14:51:50,816 - INFO - Goal (008.2, -01.8), Episode 00002, setp 3525, Action [0.935, -0.286], Crashed
+2020-09-14 14:52:12,728 - INFO - Goal (013.9, -01.3), Episode 00003, setp 3766, Action [0.976, 0.053], Reach Goal
+2020-09-14 14:52:32,674 - INFO - Goal (004.3, -01.9), Episode 00004, setp 4276, Action [0.914, -0.222], Crashed
+2020-09-14 14:52:52,300 - INFO - Goal (012.0, -01.8), Episode 00005, setp 3581, Action [0.907, -0.036], Reach Goal
+2020-09-14 14:53:19,750 - INFO - Goal (001.1, -01.9), Episode 00006, setp 5500, Action [0.912, 0.166], Reach Goal
+2020-09-14 14:53:45,025 - INFO - Goal (012.5, -02.1), Episode 00007, setp 5762, Action [0.876, 0.171], Reach Goal
+2020-09-14 14:54:06,470 - INFO - Goal (-00.3, -01.7), Episode 00008, setp 4558, Action [0.971, 0.199], Reach Goal
+2020-09-14 14:54:27,005 - INFO - Goal (007.6, -00.7), Episode 00009, setp 4272, Action [0.911, -0.231], Crashed
+2020-09-14 14:55:14,704 - INFO - Goal (014.2, 000.5), Episode 00010, setp 4250, Action [0.913, 0.079], Reach Goal
+2020-09-14 14:55:45,710 - INFO - ####################################
+2020-09-14 14:55:45,710 - INFO - ############Loading Model###########
+2020-09-14 14:55:45,710 - INFO - ####################################
+2020-09-14 14:56:08,590 - INFO - Goal (000.8, -00.9), Episode 00001, setp 4045, Action [0.889, 0.189], Reach Goal
+2020-09-14 14:56:35,567 - INFO - Goal (014.3, -01.1), Episode 00002, setp 5904, Action [0.943, 0.151], Reach Goal
+2020-09-14 14:57:02,225 - INFO - Goal (001.1, -01.6), Episode 00003, setp 5738, Action [0.918, -0.162], Crashed
+2020-09-14 14:57:22,126 - INFO - Goal (013.4, -00.5), Episode 00004, setp 3800, Action [0.899, 0.046], Reach Goal
+2020-09-14 14:57:45,016 - INFO - Goal (002.4, -01.4), Episode 00005, setp 4488, Action [0.940, -0.185], Crashed
+2020-09-14 14:57:49,970 - INFO - Goal (000.0, -03.4), Episode 00006, setp 001, Action [0.000, 0.000], Crashed
+2020-09-14 14:57:49,971 - INFO - Goal (000.0, -03.4), Episode 00007, setp 001, Action [0.000, 0.000], Crashed
+2020-09-14 14:57:49,973 - INFO - Goal (000.0, -03.4), Episode 00008, setp 001, Action [0.000, 0.000], Crashed
+2020-09-14 14:57:49,974 - INFO - Goal (000.0, -03.4), Episode 00009, setp 001, Action [0.000, 0.000], Crashed
+2020-09-14 14:57:49,976 - INFO - Goal (000.0, -03.4), Episode 00010, setp 001, Action [0.000, 0.000], Crashed
+2020-09-14 14:59:21,117 - INFO - ####################################
+2020-09-14 14:59:21,117 - INFO - ############Loading Model###########
+2020-09-14 14:59:21,117 - INFO - ####################################
+2020-09-14 15:00:04,325 - INFO - Goal (014.5, -00.7), Episode 00001, setp 3971, Action [0.975, -0.010], Reach Goal
+2020-09-14 15:00:23,005 - INFO - Goal (006.5, -02.4), Episode 00002, setp 3918, Action [0.919, -0.209], Crashed
+2020-09-14 15:01:11,274 - INFO - Goal (013.6, -02.1), Episode 00003, setp 3460, Action [0.977, -0.060], Crashed
+2020-09-14 15:01:36,132 - INFO - Goal (013.3, -02.2), Episode 00004, setp 4048, Action [0.948, -0.149], Reach Goal
+2020-09-14 15:12:13,150 - INFO - Goal (-01.0, -02.3), Episode 00005, setp 7000, Action [0.838, -0.057], Reach Goal
+2020-09-14 15:12:49,636 - INFO - Goal (012.3, -00.8), Episode 00006, setp 6176, Action [0.918, -0.155], Reach Goal
+2020-09-14 15:13:11,751 - INFO - Goal (002.9, -02.1), Episode 00007, setp 4575, Action [0.946, -0.188], Reach Goal
+2020-09-14 15:13:15,820 - INFO - Goal (-00.3, -01.8), Episode 00008, setp 780, Action [0.976, -0.141], Reach Goal
+2020-09-14 15:13:41,565 - INFO - Goal (013.0, -01.1), Episode 00009, setp 5822, Action [0.950, 0.166], Reach Goal
+2020-09-14 15:14:06,976 - INFO - Goal (001.6, -01.3), Episode 00010, setp 5345, Action [0.943, -0.176], Reach Goal
+2020-09-14 15:14:42,487 - INFO - Goal (007.5, -01.8), Episode 00011, setp 3228, Action [0.862, 0.220], Crashed
+2020-09-14 15:15:01,973 - INFO - Goal (013.8, -00.7), Episode 00012, setp 3658, Action [0.965, -0.021], Reach Goal
+2020-09-14 15:15:26,764 - INFO - Goal (000.8, -01.4), Episode 00013, setp 5405, Action [0.954, -0.153], Reach Goal
+2020-09-14 15:16:06,334 - INFO - Goal (013.7, -01.2), Episode 00014, setp 5547, Action [0.949, 0.163], Reach Goal
+2020-09-14 15:17:10,972 - INFO - Goal (000.4, -02.0), Episode 00015, setp 6225, Action [0.909, -0.165], Reach Goal
+2020-09-14 15:17:39,848 - INFO - Goal (012.3, -01.1), Episode 00016, setp 6071, Action [0.931, 0.182], Reach Goal
+2020-09-14 15:18:11,533 - INFO - Goal (001.3, -01.4), Episode 00017, setp 5391, Action [0.895, -0.179], Reach Goal
+2020-09-14 15:18:36,681 - INFO - Goal (012.8, -01.7), Episode 00018, setp 4976, Action [0.953, 0.174], Reach Goal
+2020-09-14 15:19:01,344 - INFO - Goal (000.9, -02.3), Episode 00019, setp 5368, Action [0.951, -0.166], Reach Goal
+2020-09-14 15:19:26,615 - INFO - Goal (012.3, -00.5), Episode 00020, setp 5470, Action [0.942, 0.183], Reach Goal
+2020-09-14 15:19:55,727 - INFO - Goal (000.6, -01.8), Episode 00021, setp 5882, Action [0.905, -0.137], Reach Goal
+2020-09-14 15:20:25,640 - INFO - Goal (012.6, -01.3), Episode 00022, setp 5426, Action [0.946, 0.158], Reach Goal
+2020-09-14 15:20:46,033 - INFO - Goal (010.4, -02.8), Episode 00023, setp 2261, Action [0.822, -0.329], Crashed
+2020-09-14 15:27:44,694 - INFO - Goal (003.6, 000.4), Episode 00024, setp 627, Action [0.864, -0.519], Crashed
+2020-09-14 15:28:03,482 - INFO - Goal (013.5, -01.3), Episode 00025, setp 3704, Action [0.980, 0.109], Reach Goal
+2020-09-14 15:28:20,836 - INFO - Goal (010.5, -01.9), Episode 00026, setp 2701, Action [0.858, -0.330], Crashed
+2020-09-14 15:28:46,908 - INFO - Goal (013.1, -00.6), Episode 00027, setp 3675, Action [0.979, 0.032], Reach Goal
+2020-09-14 15:29:21,314 - INFO - Goal (000.3, -01.7), Episode 00028, setp 5365, Action [0.949, 0.165], Reach Goal
+2020-09-14 15:30:25,088 - INFO - Goal (012.9, -01.0), Episode 00029, setp 6222, Action [0.902, -0.179], Reach Goal
+2020-09-14 15:32:48,956 - INFO - Goal (001.6, -01.8), Episode 00030, setp 5034, Action [0.920, -0.141], Reach Goal
+2020-09-14 15:33:42,488 - INFO - Goal (013.6, 001.2), Episode 00031, setp 5097, Action [0.930, -0.207], Reach Goal
+2020-09-14 15:34:11,085 - INFO - Goal (000.5, -01.1), Episode 00032, setp 5730, Action [0.881, 0.085], Crashed
+2020-09-14 15:34:54,823 - INFO - Goal (012.8, -00.5), Episode 00033, setp 3645, Action [0.928, 0.143], Reach Goal
+2020-09-14 15:35:19,793 - INFO - Goal (000.9, -01.8), Episode 00034, setp 5361, Action [0.950, -0.166], Reach Goal
+2020-09-14 15:36:28,257 - INFO - Goal (013.0, -01.6), Episode 00035, setp 5433, Action [0.937, 0.173], Reach Goal
+2020-09-14 15:36:43,870 - INFO - Goal (010.5, -01.4), Episode 00036, setp 2525, Action [0.867, -0.389], Crashed
+2020-09-14 15:37:06,187 - INFO - Goal (009.4, -01.4), Episode 00037, setp 2218, Action [0.960, -0.018], Crashed
+2020-09-14 15:39:23,321 - INFO - Goal (014.1, -00.5), Episode 00038, setp 7931, Action [0.941, -0.311], Reach Goal
+2020-09-14 15:40:17,904 - INFO - Goal (-00.1, -01.1), Episode 00039, setp 3947, Action [0.981, -0.051], Reach Goal
+2020-09-14 15:45:38,243 - INFO - Goal (013.5, -01.6), Episode 00040, setp 5827, Action [0.951, -0.188], Reach Goal
+2020-09-14 15:46:03,426 - INFO - Goal (003.6, -02.0), Episode 00041, setp 5253, Action [0.895, -0.180], Reach Goal
+2020-09-14 15:46:15,073 - INFO - Goal (007.4, -01.2), Episode 00042, setp 1841, Action [0.787, 0.506], Crashed
+2020-09-14 15:46:32,676 - INFO - Goal (012.5, -01.3), Episode 00043, setp 3623, Action [0.919, -0.053], Reach Goal
+2020-09-14 15:46:57,042 - INFO - Goal (002.3, -02.2), Episode 00044, setp 5693, Action [0.903, 0.198], Reach Goal
+2020-09-14 15:47:17,158 - INFO - Goal (012.8, -00.9), Episode 00045, setp 4140, Action [0.953, 0.134], Reach Goal
+2020-09-14 15:47:42,543 - INFO - Goal (000.6, -02.2), Episode 00046, setp 5910, Action [0.933, -0.144], Reach Goal
+2020-09-14 15:48:12,784 - INFO - Goal (012.7, -00.7), Episode 00047, setp 6949, Action [0.822, 0.107], Reach Goal
+2020-09-14 15:48:37,464 - INFO - Goal (000.3, -01.2), Episode 00048, setp 5181, Action [0.934, 0.177], Reach Goal
+2020-09-14 15:50:35,945 - INFO - Goal (013.3, -00.8), Episode 00049, setp 5892, Action [0.948, -0.178], Reach Goal
+2020-09-14 15:50:49,048 - INFO - Goal (010.3, -03.1), Episode 00050, setp 2092, Action [0.836, -0.359], Crashed
+2020-09-14 15:51:06,651 - INFO - Goal (004.9, 001.0), Episode 00051, setp 3493, Action [0.937, -0.461], Crashed
+2020-09-14 15:51:29,892 - INFO - Goal (013.5, -00.1), Episode 00052, setp 3668, Action [0.976, -0.004], Reach Goal
+2020-09-14 17:02:42,626 - INFO - Goal (000.5, -02.1), Episode 00053, setp 5228, Action [0.956, -0.144], Reach Goal
+2020-09-14 17:02:56,786 - INFO - Goal (003.4, -00.8), Episode 00054, setp 3093, Action [0.874, -0.290], Crashed
+2020-09-14 17:03:14,794 - INFO - Goal (012.9, -01.2), Episode 00055, setp 3505, Action [0.966, -0.035], Reach Goal
+2020-09-14 17:03:37,385 - INFO - Goal (000.4, -01.8), Episode 00056, setp 5396, Action [0.897, -0.164], Crashed
+2020-09-14 17:04:22,222 - INFO - Goal (013.7, -00.9), Episode 00057, setp 3970, Action [0.910, 0.053], Reach Goal
+2020-09-14 17:18:19,552 - INFO - Goal (000.2, -01.6), Episode 00058, setp 5144, Action [0.949, -0.143], Crashed
+2020-09-14 17:18:29,647 - INFO - Goal (007.6, -00.6), Episode 00059, setp 1571, Action [0.980, -0.192], Crashed
+2020-09-14 17:18:51,893 - INFO - Goal (014.6, -00.5), Episode 00060, setp 4631, Action [0.854, -0.160], Reach Goal
+2020-09-14 17:19:19,692 - INFO - Goal (-00.4, -01.9), Episode 00061, setp 6164, Action [0.951, -0.151], Reach Goal
+2020-09-14 17:19:44,883 - INFO - Goal (009.7, 000.7), Episode 00062, setp 5128, Action [0.887, -0.213], Crashed
+2020-09-14 17:20:04,823 - INFO - Goal (014.9, -00.9), Episode 00063, setp 4023, Action [0.969, -0.022], Reach Goal
+2020-09-14 17:20:22,732 - INFO - Goal (008.4, -00.5), Episode 00064, setp 3891, Action [0.806, 0.251], Crashed
+2020-09-14 17:20:51,106 - INFO - Goal (012.1, -02.0), Episode 00065, setp 5009, Action [0.959, 0.231], Reach Goal
+2020-09-14 17:21:05,744 - INFO - Goal (-00.6, -03.6), Episode 00066, setp 3551, Action [0.942, -0.099], Reach Goal
+2020-09-14 17:23:25,277 - INFO - ####################################
+2020-09-14 17:23:25,277 - INFO - ############Loading Model###########
+2020-09-14 17:23:25,277 - INFO - ####################################
+2020-09-14 17:23:55,901 - INFO - Goal (011.6, -01.4), Episode 00001, setp 3223, Action [0.962, -0.032], Reach Goal
+2020-09-14 17:24:21,884 - INFO - Goal (001.0, -01.3), Episode 00002, setp 5389, Action [0.848, -0.116], Reach Goal
+2020-09-14 17:24:44,665 - INFO - Goal (014.0, -01.4), Episode 00003, setp 4974, Action [0.947, 0.163], Reach Goal
+2020-09-14 17:25:15,906 - INFO - Goal (-01.6, -02.0), Episode 00004, setp 7099, Action [0.911, -0.098], Reach Goal
+2020-09-14 17:25:44,807 - INFO - Goal (014.0, -01.0), Episode 00005, setp 6948, Action [0.943, 0.131], Reach Goal
+2020-09-14 17:26:03,754 - INFO - Goal (004.6, -02.1), Episode 00006, setp 4292, Action [0.907, -0.176], Crashed
+2020-09-14 17:26:12,549 - INFO - Goal (003.8, -01.2), Episode 00007, setp 658, Action [0.977, -0.254], Crashed
+2020-09-14 17:26:32,285 - INFO - Goal (013.7, -00.2), Episode 00008, setp 3976, Action [0.959, 0.066], Reach Goal
+2020-09-14 17:26:53,997 - INFO - Goal (006.5, -01.3), Episode 00009, setp 3790, Action [0.899, -0.210], Crashed
+2020-09-14 17:27:18,573 - INFO - Goal (015.2, 000.2), Episode 00010, setp 5149, Action [0.867, -0.084], Reach Goal
+2020-09-14 17:27:44,148 - INFO - Goal (000.7, -01.1), Episode 00011, setp 6088, Action [0.869, -0.167], Reach Goal
+2020-09-14 17:28:16,628 - INFO - Goal (013.8, -00.8), Episode 00012, setp 5386, Action [0.951, 0.147], Crashed
+2020-09-14 17:28:36,680 - INFO - Goal (014.0, -00.5), Episode 00013, setp 3967, Action [0.849, -0.196], Crashed
+2020-09-14 17:28:48,056 - INFO - Goal (007.9, -01.4), Episode 00014, setp 1846, Action [0.938, -0.243], Crashed
+2020-09-14 17:29:07,528 - INFO - Goal (015.1, 000.1), Episode 00015, setp 4104, Action [0.981, -0.133], Reach Goal
+2020-09-14 17:29:35,689 - INFO - Goal (-00.7, -01.1), Episode 00016, setp 6110, Action [0.930, -0.158], Reach Goal
+2020-09-14 17:30:06,513 - INFO - Goal (014.7, -00.9), Episode 00017, setp 6471, Action [0.921, -0.156], Reach Goal
+2020-09-14 17:30:41,714 - INFO - Goal (-02.2, -02.0), Episode 00018, setp 7066, Action [0.924, 0.133], Reach Goal
+2020-09-14 17:31:13,720 - INFO - Goal (015.8, -01.5), Episode 00019, setp 7774, Action [0.887, 0.094], Reach Goal
+2020-09-14 17:31:22,235 - INFO - Goal (015.8, -01.5), Episode 00020, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,237 - INFO - Goal (015.8, -01.5), Episode 00021, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,239 - INFO - Goal (015.8, -01.5), Episode 00022, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,240 - INFO - Goal (015.8, -01.5), Episode 00023, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,242 - INFO - Goal (015.8, -01.5), Episode 00024, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,243 - INFO - Goal (015.8, -01.5), Episode 00025, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,245 - INFO - Goal (015.8, -01.5), Episode 00026, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,247 - INFO - Goal (015.8, -01.5), Episode 00027, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,248 - INFO - Goal (015.8, -01.5), Episode 00028, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,250 - INFO - Goal (015.8, -01.5), Episode 00029, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,251 - INFO - Goal (015.8, -01.5), Episode 00030, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,253 - INFO - Goal (015.8, -01.5), Episode 00031, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,254 - INFO - Goal (015.8, -01.5), Episode 00032, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,256 - INFO - Goal (015.8, -01.5), Episode 00033, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,257 - INFO - Goal (015.8, -01.5), Episode 00034, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,259 - INFO - Goal (015.8, -01.5), Episode 00035, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,260 - INFO - Goal (015.8, -01.5), Episode 00036, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,262 - INFO - Goal (015.8, -01.5), Episode 00037, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,263 - INFO - Goal (015.8, -01.5), Episode 00038, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,265 - INFO - Goal (015.8, -01.5), Episode 00039, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,266 - INFO - Goal (015.8, -01.5), Episode 00040, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,267 - INFO - Goal (015.8, -01.5), Episode 00041, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,269 - INFO - Goal (015.8, -01.5), Episode 00042, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,270 - INFO - Goal (015.8, -01.5), Episode 00043, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,271 - INFO - Goal (015.8, -01.5), Episode 00044, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,272 - INFO - Goal (015.8, -01.5), Episode 00045, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,272 - INFO - Goal (015.8, -01.5), Episode 00046, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,273 - INFO - Goal (015.8, -01.5), Episode 00047, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,274 - INFO - Goal (015.8, -01.5), Episode 00048, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,275 - INFO - Goal (015.8, -01.5), Episode 00049, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,275 - INFO - Goal (015.8, -01.5), Episode 00050, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,276 - INFO - Goal (015.8, -01.5), Episode 00051, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,277 - INFO - Goal (015.8, -01.5), Episode 00052, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,277 - INFO - Goal (015.8, -01.5), Episode 00053, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,278 - INFO - Goal (015.8, -01.5), Episode 00054, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,279 - INFO - Goal (015.8, -01.5), Episode 00055, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,279 - INFO - Goal (015.8, -01.5), Episode 00056, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,280 - INFO - Goal (015.8, -01.5), Episode 00057, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,280 - INFO - Goal (015.8, -01.5), Episode 00058, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,281 - INFO - Goal (015.8, -01.5), Episode 00059, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,282 - INFO - Goal (015.8, -01.5), Episode 00060, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,282 - INFO - Goal (015.8, -01.5), Episode 00061, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,283 - INFO - Goal (015.8, -01.5), Episode 00062, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,283 - INFO - Goal (015.8, -01.5), Episode 00063, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,284 - INFO - Goal (015.8, -01.5), Episode 00064, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,284 - INFO - Goal (015.8, -01.5), Episode 00065, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,285 - INFO - Goal (015.8, -01.5), Episode 00066, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,285 - INFO - Goal (015.8, -01.5), Episode 00067, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,286 - INFO - Goal (015.8, -01.5), Episode 00068, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,286 - INFO - Goal (015.8, -01.5), Episode 00069, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,287 - INFO - Goal (015.8, -01.5), Episode 00070, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,287 - INFO - Goal (015.8, -01.5), Episode 00071, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,287 - INFO - Goal (015.8, -01.5), Episode 00072, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,288 - INFO - Goal (015.8, -01.5), Episode 00073, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,288 - INFO - Goal (015.8, -01.5), Episode 00074, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,289 - INFO - Goal (015.8, -01.5), Episode 00075, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,289 - INFO - Goal (015.8, -01.5), Episode 00076, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,290 - INFO - Goal (015.8, -01.5), Episode 00077, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,290 - INFO - Goal (015.8, -01.5), Episode 00078, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,290 - INFO - Goal (015.8, -01.5), Episode 00079, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,291 - INFO - Goal (015.8, -01.5), Episode 00080, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,291 - INFO - Goal (015.8, -01.5), Episode 00081, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,292 - INFO - Goal (015.8, -01.5), Episode 00082, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,292 - INFO - Goal (015.8, -01.5), Episode 00083, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,292 - INFO - Goal (015.8, -01.5), Episode 00084, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,293 - INFO - Goal (015.8, -01.5), Episode 00085, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,293 - INFO - Goal (015.8, -01.5), Episode 00086, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,294 - INFO - Goal (015.8, -01.5), Episode 00087, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,294 - INFO - Goal (015.8, -01.5), Episode 00088, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,294 - INFO - Goal (015.8, -01.5), Episode 00089, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,295 - INFO - Goal (015.8, -01.5), Episode 00090, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,295 - INFO - Goal (015.8, -01.5), Episode 00091, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,295 - INFO - Goal (015.8, -01.5), Episode 00092, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,296 - INFO - Goal (015.8, -01.5), Episode 00093, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,296 - INFO - Goal (015.8, -01.5), Episode 00094, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,296 - INFO - Goal (015.8, -01.5), Episode 00095, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,297 - INFO - Goal (015.8, -01.5), Episode 00096, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,297 - INFO - Goal (015.8, -01.5), Episode 00097, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,297 - INFO - Goal (015.8, -01.5), Episode 00098, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,298 - INFO - Goal (015.8, -01.5), Episode 00099, setp 001, Action [0.000, 0.000], Reach Goal
+2020-09-14 17:31:22,298 - INFO - Goal (015.8, -01.5), Episode 00100, setp 001, Action [0.000, 0.000], Reach Goal

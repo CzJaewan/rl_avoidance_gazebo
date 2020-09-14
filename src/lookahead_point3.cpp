@@ -422,8 +422,6 @@ double LookAhead::get_alpha(const geometry_msgs::Pose& carPose)
 
 double LookAhead::getW(double _alpha)
 {
-
-
     return 2*sin(_alpha)/Lfw;
 }
 

@@ -14,10 +14,10 @@
 /********************/
 /* CLASS DEFINITION */
 /********************/
-class PurePursuit
+class LookAhead
 {
     public:
-        PurePursuit();
+        LookAhead();
         void initMarker();
         bool isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry_msgs::Pose& carPose);
         bool isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos);
@@ -52,7 +52,7 @@ class PurePursuit
 }; // end of class
 
 
-PurePursuit::PurePursuit()
+LookAhead::LookAhead()
 {
     //Private parameters handler
     ros::NodeHandle pn("~");
@@ -74,18 +74,17 @@ PurePursuit::PurePursuit()
     pn.param("speed_incremental", speed_incremental, 0.5); // speed incremental value (discrete acceleraton), unit: m/s
 
     //Publishers and Subscribers
-    odom_sub = n_.subscribe("/pure_pursuit/odom", 1, &PurePursuit::odomCB, this);
-    path_sub = n_.subscribe("/pure_pursuit/global_planner", 1, &PurePursuit::pathCB, this);
-    goal_sub = n_.subscribe("/pure_pursuit/goal", 1, &PurePursuit::goalCB, this);
-    amcl_sub = n_.subscribe("/amcl_pose", 5, &PurePursuit::amclCB, this);
-    marker_pub = n_.advertise<visualization_msgs::Marker>("/pure_pursuit/path_marker", 10);
-    ackermann_pub = n_.advertise<ackermann_msgs::AckermannDriveStamped>("/pure_pursuit/ackermann_cmd", 1);
-    if(cmd_vel_mode) cmdvel_pub = n_.advertise<geometry_msgs::Twist>("/pure_pursuit/cmd_vel", 1);    
+    odom_sub = n_.subscribe("/odom", 1, &LookAhead::odomCB, this);
+    path_sub = n_.subscribe("/move_base/GlobalPlanner/plan", 1, &LookAhead::pathCB, this);
+    goal_sub = n_.subscribe("/move_base_simple/goal", 1, &LookAhead::goalCB, this);
+    amcl_sub = n_.subscribe("/amcl_pose", 5, &LookAhead::amclCB, this);
+
+    marker_pub = n_.advertise<visualization_msgs::Marker>("/LookAhead/path_marker", 10);
 
     lookAhead_pub = n_.advertise<geometry_msgs::PoseStamped>("/lookAhead_point", 1);
 
     //Timer
-    timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &PurePursuit::controlLoopCB, this); // Duration(0.05) -> 20Hz
+    timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &LookAhead::controlLoopCB, this); // Duration(0.05) -> 20Hz
 
 
     //Init variables
@@ -103,13 +102,11 @@ PurePursuit::PurePursuit()
     //Visualization Marker Settings
     initMarker();
 
-    cmd_vel = geometry_msgs::Twist();
-    ackermann_cmd = ackermann_msgs::AckermannDriveStamped();
 }
 
 
 
-void PurePursuit::initMarker()
+void LookAhead::initMarker()
 {
     points.header.frame_id = line_strip.header.frame_id = goal_circle.header.frame_id = "odom";
     points.ns = line_strip.ns = goal_circle.ns = "Markers";
@@ -149,19 +146,19 @@ void PurePursuit::initMarker()
 }
 
 
-void PurePursuit::odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg)
+void LookAhead::odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg)
 {
     this->odom = *odomMsg;
 }
 
 
-void PurePursuit::pathCB(const nav_msgs::Path::ConstPtr& pathMsg)
+void LookAhead::pathCB(const nav_msgs::Path::ConstPtr& pathMsg)
 {
     this->map_path = *pathMsg;
 }
 
 
-void PurePursuit::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
+void LookAhead::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
 {
     this->goal_pos = goalMsg->pose.position;    
     try
@@ -183,7 +180,7 @@ void PurePursuit::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
     }
 }
 
-double PurePursuit::getYawFromPose(const geometry_msgs::Pose& carPose)
+double LookAhead::getYawFromPose(const geometry_msgs::Pose& carPose)
 {
     float x = carPose.orientation.x;
     float y = carPose.orientation.y;
@@ -198,7 +195,7 @@ double PurePursuit::getYawFromPose(const geometry_msgs::Pose& carPose)
     return yaw;
 }
 
-bool PurePursuit::isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry_msgs::Pose& carPose)
+bool LookAhead::isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry_msgs::Pose& carPose)
 {
     float car2wayPt_x = wayPt.x - carPose.position.x;
     float car2wayPt_y = wayPt.y - carPose.position.y;
@@ -214,7 +211,7 @@ bool PurePursuit::isForwardWayPt(const geometry_msgs::Point& wayPt, const geomet
 }
 
 
-bool PurePursuit::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos)
+bool LookAhead::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos)
 {
     double dx = wayPt.x - car_pos.x;
     double dy = wayPt.y - car_pos.y;
@@ -226,7 +223,7 @@ bool PurePursuit::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, cons
         return true;
 }
 
-void PurePursuit::get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose)
+void LookAhead::get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose)
 {
     geometry_msgs::Point carPose_pos = carPose.position;
     double carPose_yaw = getYawFromPose(carPose);
@@ -305,7 +302,7 @@ void PurePursuit::get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose)
   
 }
 
-void PurePursuit::amclCB(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& amclMsg)
+void LookAhead::amclCB(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& amclMsg)
 {
 
     if(this->goal_received)
@@ -323,7 +320,7 @@ void PurePursuit::amclCB(const geometry_msgs::PoseWithCovarianceStamped::ConstPt
 }
 
 
-void PurePursuit::controlLoopCB(const ros::TimerEvent&)
+void LookAhead::controlLoopCB(const ros::TimerEvent&)
 {
 
     geometry_msgs::Pose carPose = this->odom.pose.pose;
@@ -345,8 +342,8 @@ void PurePursuit::controlLoopCB(const ros::TimerEvent&)
 int main(int argc, char **argv)
 {
     //Initiate ROS
-    ros::init(argc, argv, "PurePursuit");
-    PurePursuit controller;
+    ros::init(argc, argv, "LookAhead");
+    LookAhead controller;
     ros::AsyncSpinner spinner(2); // Use multi threads
     spinner.start();
     ros::waitForShutdown();

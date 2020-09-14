@@ -12,10 +12,10 @@ from torch.optim import Adam
 from collections import deque
 
 from model.net_r import MLPPolicy, CNNPolicy
-from multi_test_world import StageWorld
+from test_world_LAH import StageWorld
 from model.ppo_r import generate_action_no_sampling, transform_buffer
 
-MAX_EPISODES = 10
+MAX_EPISODES = 100
 LASER_BEAM = 512
 LASER_HIST = 3
 HORIZON = 200
@@ -158,7 +158,7 @@ if __name__ == '__main__':
         if not os.path.exists(policy_path):
             os.makedirs(policy_path)
 
-        file = policy_path + '/stage_1.pth'
+        file = policy_path + '/wander_1.pth'
         if os.path.exists(file):
             logger.info('####################################')
             logger.info('############Loading Model###########')
