@@ -47,28 +47,28 @@ nce test in gazebo simulator
 
 # rl_avoidance_gazebo ( Multi agent )
 
-## RUN used Waitpoint 
+## RUN 
 - Servingbot Gazebo world
 ```
   roslaunch servingbot_gazebo multi-servingbot_rl_world.launch
 ``` 
 - Amcl & Map & Globalplanner & waypoint generator
 ```
-  roslaunch gazebo_rl_test multi_servingbot_rl_waypoint.launch 
+  roslaunch gazebo_rl_test multi_servingbot_rl.launch 
 ```
 - PPO local planner
 ```
   cd ~/catkin_ws/src/rl_avoidance_gazebo/GAZEBO_TEST_R
-  change the from test_world import StageWorld' -> 'from test_world_wp import StageWorld' in test_run.py 
+  change the from test_world import StageWorld' -> 'from test_world import StageWorld' in test_run.py 
   mpiexec -np 2 python test_run_r.py
 ```
 - Goal pub
 ```
-  cd ~/catkin_ws/src/rl_avoidance_gazebo/
-  mpexec -np 2 python multi_goal_pub.py
+  rostopic pub robot_0/move_base_simple/goal geometry_msgs/PoseStamped '{header: {stamp: now, frame_id: "map"}, pose: {position: {x: -10.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}'  mpexec -np 2 python multi_goal_pub.py
+  rostopic pub robot_1/move_base_simple/goal geometry_msgs/PoseStamped '{header: {stamp: now, frame_id: "map"}, pose: {position: {x: 10.0, y: 0.0, z: 0.0}, orientation: {w: 1.0}}}'
 ```
 
-## RUN used Look a head
+## RUN used Look a head <- 수정 중 아직안됨.
 - Servingbot Gazebo world
 ```
   roslaunch servingbot_gazebo multi-servingbot_rl_world.launch
