@@ -18,6 +18,7 @@ ppo_file_handler = logging.FileHandler(ppo_file, mode='a')
 ppo_file_handler.setLevel(logging.INFO)
 logger_ppo.addHandler(ppo_file_handler)
 
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 def transform_buffer(buff):
     s_batch, goal_batch, speed_batch, radius_batch, a_batch, r_batch, d_batch, l_batch, \
@@ -77,10 +78,10 @@ def generate_action(env, state_list, policy, action_bound):
         speed_list = np.asarray(speed_list)
         radius_list = np.asarray(radius_list)
 
-        s_list = Variable(torch.from_numpy(s_list)).float().cuda()
-        goal_list = Variable(torch.from_numpy(goal_list)).float().cuda()
-        speed_list = Variable(torch.from_numpy(speed_list)).float().cuda()
-        radius_list = Variable(torch.from_numpy(radius_list)).float().cuda()
+        s_list = Variable(torch.from_numpy(s_list)).float().to(device)
+        goal_list = Variable(torch.from_numpy(goal_list)).float().to(device)
+        speed_list = Variable(torch.from_numpy(speed_list)).float().to(device)
+        radius_list = Variable(torch.from_numpy(radius_list)).float().to(device)
 
         v, a, logprob, mean = policy(s_list, goal_list, speed_list, radius_list)
         v, a, logprob = v.data.cpu().numpy(), a.data.cpu().numpy(), logprob.data.cpu().numpy()
@@ -107,10 +108,10 @@ def generate_action_no_sampling(env, state_list, policy, action_bound):
         speed_list = np.asarray(speed_list)
         radius_list = np.asarray(radius_list)
 
-        s_list = Variable(torch.from_numpy(s_list)).float().cuda()
-        goal_list = Variable(torch.from_numpy(goal_list)).float().cuda()
-        speed_list = Variable(torch.from_numpy(speed_list)).float().cuda()
-        radius_list = Variable(torch.from_numpy(radius_list)).float().cuda()
+        s_list = Variable(torch.from_numpy(s_list)).float().to(device)
+        goal_list = Variable(torch.from_numpy(goal_list)).float().to(device)
+        speed_list = Variable(torch.from_numpy(speed_list)).float().to(device)
+        radius_list = Variable(torch.from_numpy(radius_list)).float().to(device)
 
         _, _, _, mean = policy(s_list, goal_list, speed_list, radius_list)
         mean = mean.data.cpu().numpy()

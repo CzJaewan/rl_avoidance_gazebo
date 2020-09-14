@@ -59,11 +59,29 @@
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2costmap_common_params.yaml" command="load" ns="local_costmap" />
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2local_costmap_params.yaml" command="load" />
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2global_costmap_params.yaml" command="load" />        
-    
+
             <param name="global_costmap/robot_base_frame" value="/$(arg robot1)/base_footprint"/>
             <param name="local_costmap/robot_base_frame" value="/$(arg robot1)/base_footprint"/>
+
+            <!-- Global Planner -->
+            <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+            <param name="planner_frequency" value="1.0" />
+            <param name="planner_patience" value="5.0" />
+            <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/global_planner_params.yaml" command="load" />
+
+            <!-- Local Planner -->
+            <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
+
+            <!-- Our carlike robot is not able to rotate in place -->
+            <param name="clearing_rotation_allowed" value="false" /> 
+
         </node>
 
+        <!--  ************** look a head **************  -->
+        <node name="Look_a_head_Node" pkg="gazebo_rl_test" type="Look_a_head_Node" output="screen">
+            <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/lookahead.yaml" command="load" />
+
+        </node>
 
     </group>
 
@@ -90,9 +108,26 @@
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2costmap_common_params.yaml" command="load" ns="local_costmap" />
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2local_costmap_params.yaml" command="load" />
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/carlike/2global_costmap_params.yaml" command="load" />        
-        
+    
             <param name="global_costmap/robot_base_frame" value="/$(arg robot2)/base_footprint"/>
             <param name="local_costmap/robot_base_frame" value="/$(arg robot2)/base_footprint"/>
+
+            <!-- Global Planner -->
+            <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+            <param name="planner_frequency" value="1.0" />
+            <param name="planner_patience" value="5.0" />
+            <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/global_planner_params.yaml" command="load" />
+
+            <!-- Local Planner -->
+            <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
+
+            <!-- Our carlike robot is not able to rotate in place -->
+            <param name="clearing_rotation_allowed" value="false" /> 
+        </node>
+
+        <!--  ************** look a head **************  -->
+        <node name="Look_a_head_Node" pkg="gazebo_rl_test" type="Look_a_head_Node" output="screen">
+            <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/lookahead.yaml" command="load" />
 
         </node>
 

@@ -12,7 +12,7 @@ from torch.optim import Adam
 from collections import deque
 
 from model.net_r import MLPPolicy, CNNPolicy
-from test_world_LAH import StageWorld
+from multi_test_world import StageWorld
 from model.ppo_r import generate_action_no_sampling, transform_buffer
 
 MAX_EPISODES = 10
@@ -43,6 +43,7 @@ def enjoy(comm, env, policy, action_bound):
         
         while not rospy.is_shutdown():
             get_goal = env.is_sub_goal
+            env.control_vel([0,0])
             if get_goal:
                 break
 
@@ -172,7 +173,6 @@ if __name__ == '__main__':
         policy = None
         policy_path = None
         opt = None
-
 
 
     try:
