@@ -11,8 +11,8 @@ class PUBGOAL():
     def __init__(self, index):
         self.index = index
 
-        self.goal_x = [2, 3, 4, 5, 6, 7, 8, 9, 10]
-        self.goal_y = [2, 3, 4, 5, 6, 7, 8, 9, 10] 
+        self.goal_x = [-10, 10, 4, 5, 6, 7, 8, 9, 10]
+        self.goal_y = [0, 0, 4, 5, 6, 7, 8, 9, 10] 
 
         node_name = 'goal' + str(index)
         rospy.init_node(node_name, anonymous=None)
@@ -20,7 +20,7 @@ class PUBGOAL():
         # -----------Publisher and Subscriber-------------
 
         pub_goal_topic = '/robot_' + str(index) + '/move_base_simple/goal'
-        self.pub_goal = rospy.Publisher(cmd_goal_topic, PoseStamped, queue_size=2)
+        self.pub_goal = rospy.Publisher(pub_goal_topic, PoseStamped, queue_size=2)
 
     def pub_goal_func(self):
         goal_pub = PoseStamped()

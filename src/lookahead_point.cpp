@@ -11,6 +11,7 @@
 #include <ackermann_msgs/AckermannDriveStamped.h>
 #include <visualization_msgs/Marker.h>
 
+
 /********************/
 /* CLASS DEFINITION */
 /********************/
@@ -43,6 +44,8 @@ class LookAhead
         int controller_freq;
         bool foundForwardPt, goal_received, goal_reached, cmd_vel_mode, debug_mode, smooth_accel;
 
+	std::string odom_topic, plan_topic, goal_topic, amcl_topic, lah_point_topic, lah_marker_topic;
+
         void odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg);
         void pathCB(const nav_msgs::Path::ConstPtr& pathMsg);
         void goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg);
@@ -73,15 +76,36 @@ LookAhead::LookAhead()
     pn.param("smooth_accel", smooth_accel, true); // smooth the acceleration of car
     pn.param("speed_incremental", speed_incremental, 0.5); // speed incremental value (discrete acceleraton), unit: m/s
 
+    //Show info
+    ROS_INFO("[param] base_angle: %f", base_angle);
+    ROS_INFO("[param] Vcmd: %f", Vcmd);
+    ROS_INFO("[param] Lfw: %f", Lfw);
+    
+    odom_topic = "/odom";
+    plan_topic = "/move_base/GlobalPlanner/plan";
+    goal_topic = "/move_base_simple/goal";
+    amcl_topic = "/amcl_pose";
+
+    lah_point_topic = "/lookAhead_point";
+    lah_marker_topic = "/LookAhead/path_marker";
+    
+    pn.param("odom_topic", odom_topic);//, "/odom");
+    pn.param("plan_topic", plan_topic);//, "/move_base/GlobalPlanner/plan"); 
+    pn.param("goal_topic", goal_topic);//, "/move_base_simple/goal"); 
+    pn.param("amcl_topic", amcl_topic);//, "/amcl_pose"); 
+
+    pn.param("lah_point_topic", lah_point_topic);//, "/lookAhead_point"); 
+    pn.param("lah_marker_topic", lah_marker_topic);//, "/LookAhead/path_marker");
+
     //Publishers and Subscribers
-    odom_sub = n_.subscribe("/odom", 1, &LookAhead::odomCB, this);
-    path_sub = n_.subscribe("/move_base/GlobalPlanner/plan", 1, &LookAhead::pathCB, this);
-    goal_sub = n_.subscribe("/move_base_simple/goal", 1, &LookAhead::goalCB, this);
-    amcl_sub = n_.subscribe("/amcl_pose", 5, &LookAhead::amclCB, this);
+    odom_sub = n_.subscribe(odom_topic, 1, &LookAhead::odomCB, this);
+    path_sub = n_.subscribe(plan_topic, 1, &LookAhead::pathCB, this);
+    goal_sub = n_.subscribe(goal_topic, 1, &LookAhead::goalCB, this);
+    amcl_sub = n_.subscribe(amcl_topic, 5, &LookAhead::amclCB, this);
 
-    marker_pub = n_.advertise<visualization_msgs::Marker>("/LookAhead/path_marker", 10);
+    marker_pub = n_.advertise<visualization_msgs::Marker>(lah_marker_topic, 10);
 
-    lookAhead_pub = n_.advertise<geometry_msgs::PoseStamped>("/lookAhead_point", 1);
+    lookAhead_pub = n_.advertise<geometry_msgs::PoseStamped>(lah_point_topic, 1);
 
     //Timer
     timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &LookAhead::controlLoopCB, this); // Duration(0.05) -> 20Hz
@@ -99,12 +123,11 @@ LookAhead::LookAhead()
     ROS_INFO("[param] Vcmd: %f", Vcmd);
     ROS_INFO("[param] Lfw: %f", Lfw);
 
+
     //Visualization Marker Settings
     initMarker();
 
 }
-
-
 
 void LookAhead::initMarker()
 {

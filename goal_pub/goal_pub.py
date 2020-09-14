@@ -8,7 +8,7 @@ import torch
 import torch.nn as nn
 from mpi4py import MPI
 
-from stage_world import PUBGOAL
+from goal_pub_config import PUBGOAL
 
 
 def run(comm, env):

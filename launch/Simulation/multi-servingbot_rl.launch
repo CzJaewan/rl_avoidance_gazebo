@@ -4,19 +4,19 @@
     <arg name="controller"  default="mpc" doc="opt: dwa, mpc, pure_pursuit"/> 
     <arg name="map"  default="empty" doc="opt: empty"/> 
 
-    <arg name="r1_x_pos" default="0.0"/>
+    <arg name="r1_x_pos" default="10.0"/>
     <arg name="r1_y_pos" default="0.0"/>
     <arg name="r1_z_pos" default="0.0"/>
     <arg name="r1_roll" default="0.0"/>
     <arg name="r1_pitch" default="0.0"/>
     <arg name="r1_yaw" default="0.0"/>
 
-    <arg name="r2_x_pos" default="0.0"/>
-    <arg name="r2_y_pos" default="-2.0"/>
+    <arg name="r2_x_pos" default="-10.0"/>
+    <arg name="r2_y_pos" default="0.0"/>
     <arg name="r2_z_pos" default="0.0"/>
     <arg name="r2_roll" default="0.0"/>
     <arg name="r2_pitch" default="0.0"/>
-    <arg name="r2_yaw" default="0.0"/>
+    <arg name="r2_yaw" default="3.14"/>
 
     <arg name="r3_x_pos" default="0.0"/>
     <arg name="r3_y_pos" default="2.0"/>

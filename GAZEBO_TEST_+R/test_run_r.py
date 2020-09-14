@@ -12,7 +12,7 @@ from torch.optim import Adam
 from collections import deque
 
 from model.net_r import MLPPolicy, CNNPolicy
-from test_world_LAH import StageWorld
+from multi_test_world import StageWorld
 from model.ppo_r import generate_action_no_sampling, transform_buffer
 
 MAX_EPISODES = 100
