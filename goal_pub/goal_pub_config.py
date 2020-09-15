@@ -34,4 +34,4 @@ class PUBGOAL():
         goal_pub.pose.orientation.y = 0.
         goal_pub.pose.orientation.z = 0.
         self.pub_goal.publish(goal_pub)
-
+        rospy.sleep(2.)

@@ -12,7 +12,8 @@ from goal_pub_config import PUBGOAL
 
 
 def run(comm, env):
-    env.pub_goal_func()
+    while not rospy.is_shutdown():
+        env.pub_goal_func()
 
 
 if __name__ == '__main__':

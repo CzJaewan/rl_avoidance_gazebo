@@ -75,7 +75,7 @@ class StageWorld():
         self.sim_clock = rospy.Subscriber('clock', Clock, self.sim_clock_callback)
         
         # -----------Gazebo data----------------------------
-        goal_topic = 'robot_' + str(index) + 'move_base_simple/goal'
+        goal_topic = 'robot_' + str(index) + '/move_base_simple/goal'
         self.goal_sub = rospy.Subscriber(goal_topic, PoseStamped, self.goal_callback)
         
         self.set_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)

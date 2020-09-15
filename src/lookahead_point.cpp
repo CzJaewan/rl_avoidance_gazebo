@@ -44,7 +44,7 @@ class LookAhead
         int controller_freq;
         bool foundForwardPt, goal_received, goal_reached, cmd_vel_mode, debug_mode, smooth_accel;
 
-	std::string odom_topic, plan_topic, goal_topic, amcl_topic, lah_point_topic, lah_marker_topic;
+	    std::string odom_frame, odom_topic, plan_topic, goal_topic, amcl_topic, lah_point_topic, lah_marker_topic;
 
         void odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg);
         void pathCB(const nav_msgs::Path::ConstPtr& pathMsg);
@@ -85,17 +85,18 @@ LookAhead::LookAhead()
     plan_topic = "/move_base/GlobalPlanner/plan";
     goal_topic = "/move_base_simple/goal";
     amcl_topic = "/amcl_pose";
-
+    odom_frame = "odom";
     lah_point_topic = "/lookAhead_point";
     lah_marker_topic = "/LookAhead/path_marker";
     
-    pn.param("odom_topic", odom_topic);//, "/odom");
-    pn.param("plan_topic", plan_topic);//, "/move_base/GlobalPlanner/plan"); 
-    pn.param("goal_topic", goal_topic);//, "/move_base_simple/goal"); 
-    pn.param("amcl_topic", amcl_topic);//, "/amcl_pose"); 
+    pn.getParam("odom_topic", odom_topic);//, "/odom");
+    pn.getParam("plan_topic", plan_topic);//, "/move_base/GlobalPlanner/plan"); 
+    pn.getParam("goal_topic", goal_topic);//, "/move_base_simple/goal"); 
+    pn.getParam("amcl_topic", amcl_topic);//, "/amcl_pose"); 
+    pn.getParam("odom_frame", odom_frame);
 
-    pn.param("lah_point_topic", lah_point_topic);//, "/lookAhead_point"); 
-    pn.param("lah_marker_topic", lah_marker_topic);//, "/LookAhead/path_marker");
+    pn.getParam("lah_point_topic", lah_point_topic);//, "/lookAhead_point"); 
+    pn.getParam("lah_marker_topic", lah_marker_topic);//, "/LookAhead/path_marker");
 
     //Publishers and Subscribers
     odom_sub = n_.subscribe(odom_topic, 1, &LookAhead::odomCB, this);
@@ -119,10 +120,14 @@ LookAhead::LookAhead()
     steering = base_angle;
 
     //Show info
-    ROS_INFO("[param] base_angle: %f", base_angle);
-    ROS_INFO("[param] Vcmd: %f", Vcmd);
-    ROS_INFO("[param] Lfw: %f", Lfw);
+    ROS_INFO_STREAM(odom_topic);
+    ROS_INFO_STREAM(plan_topic);
+    ROS_INFO_STREAM(goal_topic);
+    ROS_INFO_STREAM(amcl_topic);
+    ROS_INFO_STREAM(odom_frame);
 
+    ROS_INFO_STREAM(lah_point_topic);
+    ROS_INFO_STREAM(lah_marker_topic);
 
     //Visualization Marker Settings
     initMarker();
@@ -187,7 +192,7 @@ void LookAhead::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
     try
     {
         geometry_msgs::PoseStamped odom_goal;
-        tf_listener.transformPose("odom", ros::Time(0) , *goalMsg, "map" ,odom_goal);
+        tf_listener.transformPose(odom_frame, ros::Time(0) , *goalMsg, "map" ,odom_goal);
         odom_goal_pos = odom_goal.pose.position;
         goal_received = true;
         goal_reached = false;
@@ -265,7 +270,7 @@ void LookAhead::get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose)
 
             try
             {
-                tf_listener.transformPose("odom", ros::Time(0) , map_path_pose, "map" ,odom_path_pose);
+                tf_listener.transformPose(odom_frame, ros::Time(0) , map_path_pose, "map" ,odom_path_pose);
                 geometry_msgs::Point odom_path_wayPt = odom_path_pose.pose.position;
                 bool _isForwardWayPt = isForwardWayPt(odom_path_wayPt,carPose);
 

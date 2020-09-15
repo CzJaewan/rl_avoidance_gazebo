@@ -78,6 +78,13 @@
         <!--  ************** look a head **************  -->
         <node name="Look_a_head_Node" pkg="gazebo_rl_test" type="Look_a_head_Node" output="screen">
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/lookahead.yaml" command="load" />
+            <param name="odom_topic"            value="/$(arg robot1)/odom"/>
+            <param name="plan_topic"            value="/$(arg robot1)/move_base/GlobalPlanner/plan"/>
+            <param name="goal_topic"            value="/$(arg robot1)/move_base_simple/goal"/>
+            <param name="amcl_topic"            value="/$(arg robot1)/amcl_pose"/>
+            <param name="lah_point_topic"       value="/$(arg robot1)/lookAhead_point"/>
+            <param name="lah_marker_topic"      value="/$(arg robot1)/LookAhead/path_marker"/>
+            <param name="odom_frame"            value="/$(arg robot1)/odom"/>
 
         </node>
 
@@ -126,6 +133,13 @@
         <!--  ************** look a head **************  -->
         <node name="Look_a_head_Node" pkg="gazebo_rl_test" type="Look_a_head_Node" output="screen">
             <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/lookahead.yaml" command="load" />
+            <param name="odom_topic"            value="/$(arg robot2)/odom"/>
+            <param name="plan_topic"            value="/$(arg robot2)/move_base/GlobalPlanner/plan"/>
+            <param name="goal_topic"            value="/$(arg robot2)/move_base_simple/goal"/>
+            <param name="amcl_topic"            value="/$(arg robot2)/amcl_pose"/>
+            <param name="lah_point_topic"       value="/$(arg robot2)/lookAhead_point"/>
+            <param name="lah_marker_topic"      value="/$(arg robot2)/LookAhead/path_marker"/>
+            <param name="odom_frame"            value="/$(arg robot2)/odom"/>
 
         </node>
 

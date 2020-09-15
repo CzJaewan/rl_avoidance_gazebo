@@ -22,10 +22,12 @@ controller_freq: 20 # unit: Hz
 
 pathLength: 10.0
 
-odom_topic: "/odom"
+odom_topic: "/robot1/odom"
 plan_topic: "/move_base/GlobalPlanner/plan"
 goal_topic: "/move_base_simple/goal"
 amcl_topic: "/amcl_pose"
+
+odom_frame: "odom"
 
 lah_point_topic: "/lookAhead_point"
 lah_marker_topic: "/LookAhead/path_marker"
