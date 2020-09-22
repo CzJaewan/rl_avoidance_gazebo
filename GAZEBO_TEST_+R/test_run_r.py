@@ -12,7 +12,7 @@ from torch.optim import Adam
 from collections import deque
 
 from model.net_r import MLPPolicy, CNNPolicy
-from multi_test_world_LAH import StageWorld
+from test_amcl_world_LAH import StageWorld
 from model.ppo_r import generate_action_no_sampling, transform_buffer
 
 MAX_EPISODES = 100
@@ -29,7 +29,7 @@ NUM_ENV = 1
 OBS_SIZE = 512
 ACT_SIZE = 2
 LEARNING_RATE = 5e-5
-RADIUS = 0.5
+RADIUS = 0.3
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -158,7 +158,7 @@ if __name__ == '__main__':
         if not os.path.exists(policy_path):
             os.makedirs(policy_path)
 
-        file = policy_path + '/wander_1.pth'
+        file = policy_path + '/accel_epi_76000.pth'
         if os.path.exists(file):
             logger.info('####################################')
             logger.info('############Loading Model###########')

@@ -23,7 +23,7 @@ class LookAhead
         bool isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry_msgs::Pose& carPose);
         bool isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos);
         double getYawFromPose(const geometry_msgs::Pose& carPose);        
-        void get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose);
+        void get_lookahead_point(const geometry_msgs::Pose& carPose);
 
     private:
         ros::NodeHandle n_;
@@ -34,15 +34,13 @@ class LookAhead
 
         visualization_msgs::Marker points, line_strip, goal_circle;
         geometry_msgs::Point odom_goal_pos, goal_pos;
-        geometry_msgs::Twist cmd_vel;
-        ackermann_msgs::AckermannDriveStamped ackermann_cmd;
         nav_msgs::Odometry odom;
         nav_msgs::Path map_path, odom_path;
 
-        double L, Lfw, Vcmd, lfw, steering, velocity;
-        double steering_gain, base_angle, goal_radius, speed_incremental;
+        double Lfw;
+        double goal_radius;
         int controller_freq;
-        bool foundForwardPt, goal_received, goal_reached, cmd_vel_mode, debug_mode, smooth_accel;
+        bool foundForwardPt, goal_received, goal_reached;
 
 	    std::string odom_frame, odom_topic, plan_topic, goal_topic, amcl_topic, lah_point_topic, lah_marker_topic;
 
@@ -61,26 +59,12 @@ LookAhead::LookAhead()
     ros::NodeHandle pn("~");
 
     //Car parameter
-    pn.param("L", L, 0.26); // length of car
-    pn.param("Vcmd", Vcmd, 1.0);// reference speed (m/s)
     pn.param("Lfw", Lfw, 3.0); // forward look ahead distance (m)
-    pn.param("lfw", lfw, 0.13); // distance between front the center of car
-
-    //Controller parameter
     pn.param("controller_freq", controller_freq, 20);
-    pn.param("steering_gain", steering_gain, 1.0);
-    pn.param("goal_radius", goal_radius, 0.5); // goal radius (m)
-    pn.param("base_angle", base_angle, 0.0); // neutral point of servo (rad) 
-    pn.param("cmd_vel_mode", cmd_vel_mode, false); // whether or not publishing cmd_vel
-    pn.param("debug_mode", debug_mode, false); // debug mode
-    pn.param("smooth_accel", smooth_accel, true); // smooth the acceleration of car
-    pn.param("speed_incremental", speed_incremental, 0.5); // speed incremental value (discrete acceleraton), unit: m/s
 
-    //Show info
-    ROS_INFO("[param] base_angle: %f", base_angle);
-    ROS_INFO("[param] Vcmd: %f", Vcmd);
-    ROS_INFO("[param] Lfw: %f", Lfw);
+    pn.param("goal_radius", goal_radius, 0.5); // goal radius (m)
     
+    //Show info
     odom_topic = "/odom";
     plan_topic = "/move_base/GlobalPlanner/plan";
     goal_topic = "/move_base_simple/goal";
@@ -111,13 +95,10 @@ LookAhead::LookAhead()
     //Timer
     timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &LookAhead::controlLoopCB, this); // Duration(0.05) -> 20Hz
 
-
     //Init variables
     foundForwardPt = false;
     goal_received = false;
     goal_reached = false;
-    velocity = 0.0;
-    steering = base_angle;
 
     //Show info
     ROS_INFO_STREAM(odom_topic);
@@ -223,21 +204,6 @@ double LookAhead::getYawFromPose(const geometry_msgs::Pose& carPose)
     return yaw;
 }
 
-bool LookAhead::isForwardWayPt(const geometry_msgs::Point& wayPt, const geometry_msgs::Pose& carPose)
-{
-    float car2wayPt_x = wayPt.x - carPose.position.x;
-    float car2wayPt_y = wayPt.y - carPose.position.y;
-    double car_theta = getYawFromPose(carPose);
-
-    float car_car2wayPt_x = cos(car_theta)*car2wayPt_x + sin(car_theta)*car2wayPt_y;
-    float car_car2wayPt_y = -sin(car_theta)*car2wayPt_x + cos(car_theta)*car2wayPt_y;
-
-    if(car_car2wayPt_x >0) /*is Forward WayPt*/
-        return true;
-    else
-        return false;
-}
-
 
 bool LookAhead::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos)
 {
@@ -251,7 +217,7 @@ bool LookAhead::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const 
         return true;
 }
 
-void LookAhead::get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose)
+void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
 {
     geometry_msgs::Point carPose_pos = carPose.position;
     double carPose_yaw = getYawFromPose(carPose);
@@ -272,23 +238,19 @@ void LookAhead::get_odom_car2WayPtVec(const geometry_msgs::Pose& carPose)
             {
                 tf_listener.transformPose(odom_frame, ros::Time(0) , map_path_pose, "map" ,odom_path_pose);
                 geometry_msgs::Point odom_path_wayPt = odom_path_pose.pose.position;
-                bool _isForwardWayPt = isForwardWayPt(odom_path_wayPt,carPose);
 
-                if(_isForwardWayPt)
+                bool _isWayPtAwayFromLfwDist = isWayPtAwayFromLfwDist(odom_path_wayPt,carPose_pos);
+                if(_isWayPtAwayFromLfwDist)
                 {
-                    bool _isWayPtAwayFromLfwDist = isWayPtAwayFromLfwDist(odom_path_wayPt,carPose_pos);
-                    if(_isWayPtAwayFromLfwDist)
-                    {
-                        forwardPt = odom_path_wayPt;
+                    forwardPt = odom_path_wayPt;
 
-                        lookAhead_Pose.header.frame_id = "map";
-                        lookAhead_Pose.pose.position.x = odom_path_wayPt.x;
-                        lookAhead_Pose.pose.position.y = odom_path_wayPt.y;
-                        lookAhead_pub.publish(lookAhead_Pose);
+                    lookAhead_Pose.header.frame_id = "map";
+                    lookAhead_Pose.pose.position.x = odom_path_wayPt.x;
+                    lookAhead_Pose.pose.position.y = odom_path_wayPt.y;
+                    lookAhead_pub.publish(lookAhead_Pose);
 
-                        foundForwardPt = true;
-                        break;
-                    }
+                    foundForwardPt = true;
+                    break;
                 }
             }
             catch(tf::TransformException &ex)
@@ -357,7 +319,7 @@ void LookAhead::controlLoopCB(const ros::TimerEvent&)
     if(this->goal_received)
     {
         /*Estimate Steering Angle*/
-        get_odom_car2WayPtVec(carPose);  
+        get_lookahead_point(carPose);  
        
     }
 
