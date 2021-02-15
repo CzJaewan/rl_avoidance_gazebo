@@ -24,16 +24,21 @@ class LookAhead
         bool isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const geometry_msgs::Point& car_pos);
         double getYawFromPose(const geometry_msgs::Pose& carPose);        
         void get_lookahead_point(const geometry_msgs::Pose& carPose);
+        void find_lookahead_point(const geometry_msgs::Pose& carPose);
 
     private:
         ros::NodeHandle n_;
         ros::Subscriber odom_sub, path_sub, goal_sub, amcl_sub;
-        ros::Publisher ackermann_pub, cmdvel_pub, marker_pub, lookAhead_pub;
+        ros::Publisher ackermann_pub, cmdvel_pub, marker_pub, lookAhead_pub, marker_lookAhead_pub;
         ros::Timer timer1, timer2;
         tf::TransformListener tf_listener;
 
         visualization_msgs::Marker points, line_strip, goal_circle;
-        geometry_msgs::Point odom_goal_pos, goal_pos;
+        geometry_msgs::Point odom_goal_pt, goal_pos, amcl_pt;
+        geometry_msgs::PoseStamped odom_goal_Pose;
+        geometry_msgs::PoseStamped forwardPose;
+
+
         nav_msgs::Odometry odom;
         nav_msgs::Path map_path, odom_path;
 
@@ -41,8 +46,9 @@ class LookAhead
         double goal_radius;
         int controller_freq;
         bool foundForwardPt, goal_received, goal_reached;
+        int path_count;
 
-	    std::string odom_frame, odom_topic, plan_topic, goal_topic, amcl_topic, lah_point_topic, lah_marker_topic;
+	    std::string odom_frame, map_frame, odom_topic, plan_topic, goal_topic, amcl_topic, lah_point_topic, lah_marker_topic, lah_marker_pose_topic;
 
         void odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg);
         void pathCB(const nav_msgs::Path::ConstPtr& pathMsg);
@@ -60,27 +66,32 @@ LookAhead::LookAhead()
 
     //Car parameter
     pn.param("Lfw", Lfw, 3.0); // forward look ahead distance (m)
-    pn.param("controller_freq", controller_freq, 20);
+    pn.param("controller_freq", controller_freq, 30);
 
     pn.param("goal_radius", goal_radius, 0.5); // goal radius (m)
     
     //Show info
-    odom_topic = "/odom";
-    plan_topic = "/move_base/GlobalPlanner/plan";
-    goal_topic = "/move_base_simple/goal";
-    amcl_topic = "/amcl_pose";
+    odom_topic = "odom";
+    plan_topic = "move_base/GlobalPlanner/plan";
+    goal_topic = "move_base_simple/goal";
+    amcl_topic = "amcl_pose";
     odom_frame = "odom";
+    map_frame = "map";
     lah_point_topic = "/lookAhead_point";
     lah_marker_topic = "/LookAhead/path_marker";
+    lah_marker_pose_topic = "/LookAhead_marker_pose";
+    
     
     pn.getParam("odom_topic", odom_topic);//, "/odom");
     pn.getParam("plan_topic", plan_topic);//, "/move_base/GlobalPlanner/plan"); 
     pn.getParam("goal_topic", goal_topic);//, "/move_base_simple/goal"); 
     pn.getParam("amcl_topic", amcl_topic);//, "/amcl_pose"); 
     pn.getParam("odom_frame", odom_frame);
+    pn.getParam("map_frame", map_frame);
 
     pn.getParam("lah_point_topic", lah_point_topic);//, "/lookAhead_point"); 
     pn.getParam("lah_marker_topic", lah_marker_topic);//, "/LookAhead/path_marker");
+    pn.getParam("lah_marker_point_topic", lah_marker_pose_topic);//, "/LookAhead/path_marker");
 
     //Publishers and Subscribers
     odom_sub = n_.subscribe(odom_topic, 1, &LookAhead::odomCB, this);
@@ -92,6 +103,7 @@ LookAhead::LookAhead()
 
     lookAhead_pub = n_.advertise<geometry_msgs::PoseStamped>(lah_point_topic, 1);
 
+    marker_lookAhead_pub = n_.advertise<geometry_msgs::Point>(lah_marker_pose_topic, 1);
     //Timer
     timer1 = n_.createTimer(ros::Duration((1.0)/controller_freq), &LookAhead::controlLoopCB, this); // Duration(0.05) -> 20Hz
 
@@ -99,6 +111,9 @@ LookAhead::LookAhead()
     foundForwardPt = false;
     goal_received = false;
     goal_reached = false;
+
+    path_count = 0;
+   
 
     //Show info
     ROS_INFO_STREAM(odom_topic);
@@ -109,6 +124,7 @@ LookAhead::LookAhead()
 
     ROS_INFO_STREAM(lah_point_topic);
     ROS_INFO_STREAM(lah_marker_topic);
+    ROS_INFO_STREAM(lah_marker_pose_topic);
 
     //Visualization Marker Settings
     initMarker();
@@ -117,7 +133,7 @@ LookAhead::LookAhead()
 
 void LookAhead::initMarker()
 {
-    points.header.frame_id = line_strip.header.frame_id = goal_circle.header.frame_id = "odom";
+    points.header.frame_id = line_strip.header.frame_id = goal_circle.header.frame_id = odom_frame;
     points.ns = line_strip.ns = goal_circle.ns = "Markers";
     points.action = line_strip.action = goal_circle.action = visualization_msgs::Marker::ADD;
     points.pose.orientation.w = line_strip.pose.orientation.w = goal_circle.pose.orientation.w = 1.0;
@@ -164,6 +180,7 @@ void LookAhead::odomCB(const nav_msgs::Odometry::ConstPtr& odomMsg)
 void LookAhead::pathCB(const nav_msgs::Path::ConstPtr& pathMsg)
 {
     this->map_path = *pathMsg;
+    path_count = 0;
 }
 
 
@@ -173,8 +190,12 @@ void LookAhead::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
     try
     {
         geometry_msgs::PoseStamped odom_goal;
-        tf_listener.transformPose(odom_frame, ros::Time(0) , *goalMsg, "map" ,odom_goal);
-        odom_goal_pos = odom_goal.pose.position;
+
+        tf_listener.transformPose(odom_frame, ros::Time(0) , *goalMsg, map_frame ,odom_goal);
+
+        odom_goal_pt = odom_goal.pose.position;
+	    odom_goal_Pose = odom_goal;
+
         goal_received = true;
         goal_reached = false;
 
@@ -184,7 +205,7 @@ void LookAhead::goalCB(const geometry_msgs::PoseStamped::ConstPtr& goalMsg)
     }
     catch(tf::TransformException &ex)
     {
-        ROS_ERROR("%s",ex.what());
+        ROS_ERROR("get_goal : %s",ex.what());
         ros::Duration(1.0).sleep();
     }
 }
@@ -217,6 +238,50 @@ bool LookAhead::isWayPtAwayFromLfwDist(const geometry_msgs::Point& wayPt, const 
         return true;
 }
 
+void LookAhead::find_lookahead_point(const geometry_msgs::Pose& carPose)
+{
+    geometry_msgs::PoseStamped lookAhead_Pose;
+    geometry_msgs::Point carPose_pos = carPose.position;
+
+    ROS_INFO("map_path_size : %d", map_path.poses.size());
+    if(!goal_reached){
+        
+        geometry_msgs::PoseStamped first_path_pose = map_path.poses[0];
+        for(int i = path_count; i< map_path.poses.size(); i++)
+        {
+            geometry_msgs::PoseStamped map_path_pose = map_path.poses[i];
+            geometry_msgs::PoseStamped odom_path_pose;  
+
+            //double waytoway_dist_x = first_path_pose.pose.position.x - map_path_pose.pose.position.x;
+            //double waytoway_dist_y = first_path_pose.pose.position.y - map_path_pose.pose.position.y;
+            double waytoway_dist_x = amcl_pt.x - map_path_pose.pose.position.x;
+            double waytoway_dist_y = amcl_pt.y - map_path_pose.pose.position.y;
+            
+            double waytoway_dist = sqrt(waytoway_dist_x*waytoway_dist_x + waytoway_dist_y*waytoway_dist_y);
+
+            if(waytoway_dist >= Lfw)
+            {
+	            lookAhead_Pose.header.frame_id = map_frame;
+		        lookAhead_Pose.pose.position.x = map_path_pose.pose.position.x;
+		        lookAhead_Pose.pose.position.y = map_path_pose.pose.position.y;
+		        lookAhead_pub.publish(lookAhead_Pose);
+                path_count = i;
+   
+                break;
+
+            }
+            else if(i == map_path.poses.size() - 1)
+            {
+                lookAhead_Pose.header.frame_id = map_frame;
+                lookAhead_Pose.pose.position.x = map_path_pose.pose.position.x;
+                lookAhead_Pose.pose.position.y = map_path_pose.pose.position.y;
+                lookAhead_pub.publish(lookAhead_Pose);
+            }
+
+        }
+    }
+}
+
 void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
 {
     geometry_msgs::Point carPose_pos = carPose.position;
@@ -225,6 +290,7 @@ void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
     geometry_msgs::Point odom_car2WayPtVec;
 
     geometry_msgs::PoseStamped lookAhead_Pose;
+    geometry_msgs::PoseStamped map_base_way_pose;
 
     foundForwardPt = false;
 
@@ -236,17 +302,22 @@ void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
 
             try
             {
-                tf_listener.transformPose(odom_frame, ros::Time(0) , map_path_pose, "map" ,odom_path_pose);
-                geometry_msgs::Point odom_path_wayPt = odom_path_pose.pose.position;
+                tf_listener.transformPose(odom_frame, ros::Time(0) , map_path_pose, map_frame ,odom_path_pose); //map_path.pose -> odom_path.pose : waypoint odom style
+                geometry_msgs::Point odom_path_wayPt = odom_path_pose.pose.position; // waypoint odom style
 
                 bool _isWayPtAwayFromLfwDist = isWayPtAwayFromLfwDist(odom_path_wayPt,carPose_pos);
                 if(_isWayPtAwayFromLfwDist)
                 {
-                    forwardPt = odom_path_wayPt;
 
-                    lookAhead_Pose.header.frame_id = "map";
-                    lookAhead_Pose.pose.position.x = odom_path_wayPt.x;
-                    lookAhead_Pose.pose.position.y = odom_path_wayPt.y;
+                    ROS_INFO("not goal REACHED!");
+                    forwardPt = odom_path_wayPt;
+                    forwardPose = odom_path_pose;
+
+                    tf_listener.transformPose(map_frame, ros::Time(0) , forwardPose, odom_frame ,map_base_way_pose);
+            
+                    lookAhead_Pose.header.frame_id = map_frame;
+                    lookAhead_Pose.pose.position.x = map_base_way_pose.pose.position.x;
+                    lookAhead_Pose.pose.position.y = map_base_way_pose.pose.position.y;
                     lookAhead_pub.publish(lookAhead_Pose);
 
                     foundForwardPt = true;
@@ -255,7 +326,8 @@ void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
             }
             catch(tf::TransformException &ex)
             {
-                ROS_ERROR("%s",ex.what());
+		
+                ROS_ERROR("goal resached : %s",ex.what());
                 ros::Duration(1.0).sleep();
             }
         }
@@ -263,15 +335,19 @@ void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
     }
     else if(goal_reached)
     {
-        forwardPt = odom_goal_pos;
-
-        lookAhead_Pose.header.frame_id = "map";
-        lookAhead_Pose.pose.position.x = odom_goal_pos.x;
-        lookAhead_Pose.pose.position.y = odom_goal_pos.y;
-        lookAhead_pub.publish(lookAhead_Pose);
-
+        forwardPt = odom_goal_pt;
+        forwardPose = odom_goal_Pose;
         foundForwardPt = false;
-        //ROS_INFO("goal REACHED!");
+        
+        ROS_INFO("goal REACHED!");
+        /*
+        tf_listener.transformPose(map_frame, ros::Time(0) , forwardPose, odom_frame ,map_base_way_pose);
+    
+        lookAhead_Pose.header.frame_id = map_frame;
+        lookAhead_Pose.pose.position.x = map_base_way_pose.pose.position.x;
+        lookAhead_Pose.pose.position.y = map_base_way_pose.pose.position.y;
+        lookAhead_pub.publish(lookAhead_Pose);
+        */
     }
 
     /*Visualized Target Point on RVIZ*/
@@ -285,15 +361,39 @@ void LookAhead::get_lookahead_point(const geometry_msgs::Pose& carPose)
         points.points.push_back(forwardPt);
         line_strip.points.push_back(carPose_pos);
         line_strip.points.push_back(forwardPt);
+        marker_lookAhead_pub.publish(forwardPt);
+
     }
 
     marker_pub.publish(points);
     marker_pub.publish(line_strip);
-  
+    /*
+    geometry_msgs::PoseStamped map_base_way_pose;
+    try
+    {
+        tf_listener.transformPose(map_frame, ros::Time(0) , forwardPose, odom_frame ,map_base_way_pose);
+    
+        lookAhead_Pose.header.frame_id = map_frame;
+        lookAhead_Pose.pose.position.x = map_base_way_pose.pose.position.x;
+        lookAhead_Pose.pose.position.y = map_base_way_pose.pose.position.y;
+        lookAhead_pub.publish(lookAhead_Pose);
+    }
+    catch(tf::TransformException &ex)
+    {
+	
+        ROS_ERROR("send lookAhead : %s",ex.what());
+        ros::Duration(1.0).sleep();
+    }
+    */
 }
+
+
+
+
 
 void LookAhead::amclCB(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& amclMsg)
 {
+    amcl_pt = amclMsg->pose.pose.position;
 
     if(this->goal_received)
     {
@@ -319,8 +419,8 @@ void LookAhead::controlLoopCB(const ros::TimerEvent&)
     if(this->goal_received)
     {
         /*Estimate Steering Angle*/
-        get_lookahead_point(carPose);  
-       
+        //get_lookahead_point(carPose);  
+       find_lookahead_point(carPose);
     }
 
 }

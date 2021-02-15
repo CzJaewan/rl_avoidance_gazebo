@@ -53,7 +53,6 @@
         <remap from="/cmd_vel" to="/fake_cmd" unless="$(eval controller == 'dwa')"/>
     </node>
     
-
     <!--  ************** Visualisation **************  -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gazebo_rl_test)/launch/Simulation/params/rviz_rl_navigation.rviz"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find gazebo_rl_test)/launch/Simulation/params/rviz_single_rl_navigation.rviz"/>
 </launch>

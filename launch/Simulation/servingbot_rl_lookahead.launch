@@ -25,7 +25,7 @@
     <!--  ************** Localization **************  -->
     
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
-        <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/2amcl_params.yaml" command="load" />
+        <rosparam file="$(find gazebo_rl_test)/launch/Simulation/params/3amcl_params.yaml" command="load" />
         <param name="initial_pose_x"            value="$(arg x_pos)"/>
         <param name="initial_pose_y"            value="$(arg y_pos)"/>
         <param name="initial_pose_a"            value="$(arg yaw)" if="$(eval map == 'empty')"/>
@@ -49,6 +49,7 @@
 
         <!-- Our carlike robot is not able to rotate in place -->
         <param name="clearing_rotation_allowed" value="false" /> 
+
         <!-- external controller -->
         <remap from="/cmd_vel" to="/fake_cmd" unless="$(eval controller == 'dwa')"/>
     </node>

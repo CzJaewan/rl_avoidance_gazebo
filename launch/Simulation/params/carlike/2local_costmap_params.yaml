@@ -7,8 +7,8 @@ local_costmap:
   rolling_window: true
 #width: 5.5
 #height: 5.5
-  width: 8
-  height: 8
+  width: 10
+  height: 10
   resolution: 0.2
   transform_tolerance: 0.5
   

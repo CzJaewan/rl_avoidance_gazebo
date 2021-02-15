@@ -8,9 +8,9 @@ transform_tolerance: 0.2
 map_type: costmap
 
 obstacle_layer:
- enabled: true
+ enabled: false
  obstacle_range: 3.0
- raytrace_range: 3.5
+ raytrace_range: 0
  inflation_radius: 0.2
  track_unknown_space: false
  combination_method: 1

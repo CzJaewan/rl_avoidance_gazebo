@@ -8,6 +8,8 @@ Panels:
         - /TF1/Frames1
         - /RobotModel_01
         - /lookahead1
+        - /Pose2
+        - /PoseArray1
       Splitter Ratio: 0.605095983
     Tree Height: 772
   - Class: rviz/Selection
@@ -309,12 +311,21 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        base_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        body_link:
+        base_scan1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_scan2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -329,7 +340,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        caster_front_link:
+        caster_front_left_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        caster_front_right_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        for_multi_agent_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -338,11 +359,14 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        lidar_link:
+        vision_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
+        vision_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         wheel_left_link:
           Alpha: 1
           Show Axes: false
@@ -366,6 +390,37 @@ Visualization Manager:
       Namespaces:
         {}
       Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.100000001
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.300000012
+      Head Radius: 0.100000001
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.0500000007
+      Shape: Axes
+      Topic: /lookAhead_point
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Arrow Length: 0.300000012
+      Axes Length: 0.300000012
+      Axes Radius: 0.00999999978
+      Class: rviz/PoseArray
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.0700000003
+      Head Radius: 0.0299999993
+      Name: PoseArray
+      Shaft Length: 0.230000004
+      Shaft Radius: 0.00999999978
+      Shape: Arrow (Flat)
+      Topic: /particlecloud
+      Unreliable: false
       Value: true
   Enabled: true
   Global Options:
